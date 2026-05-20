@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: The Mystery of Colors - Section 1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 20px 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide.active { display: flex; }
+        .bg-colors {
+            background: linear-gradient(135deg,
+                #ef4444 0%, #f97316 18%, #eab308 34%,
+                #22c55e 50%, #3b82f6 66%, #8b5cf6 82%, #ec4899 100%);
+        }
+
+        .text-reading { font-size: 1.9rem; line-height: 1.8; }
+        .text-check { font-size: 2.1rem; line-height: 1.5; }
+        .word-wrapper { display: inline-block; white-space: nowrap; }
+        .slashable-char {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            padding: 0 1px;
+            transition: background 0.2s;
+        }
+        .slashable-char:hover { background-color: rgba(59, 130, 246, 0.1); }
+        .slashable-space { display: inline-block; min-width: 0.8em; cursor: pointer; }
+        .slash-mark::after {
+            content: "/";
+            color: #ef4444;
+            font-weight: 900;
+            margin-left: 4px;
+            margin-right: 4px;
+            display: inline-block;
+            transform: scale(1.2);
+            pointer-events: none;
+        }
+        .highlight-static {
+            font-weight: normal;
+            color: #1f2937 !important;
+            border-bottom: none !important;
+            padding: 0;
+            margin: 0;
+            display: inline;
+        }
+        .hidden-answer {
+            display: inline-block;
+            color: transparent !important;
+            border-bottom: 3px solid #3b82f6 !important;
+            padding: 0 8px;
+            margin: 0 4px;
+            cursor: pointer;
+            min-width: 120px;
+            text-align: center;
+            vertical-align: baseline;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .hidden-answer.show {
+            color: #ef4444 !important;
+            font-weight: bold;
+        }
+        .phrase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .phrase-card:hover { border-color: #3b82f6; transform: translateX(5px); }
+        .phrase-en { font-size: 1.6rem; font-weight: bold; color: #1f2937; }
+        .phrase-ja { font-size: 1.3rem; color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
+        .phrase-card.active .phrase-ja { opacity: 1; }
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .content-box {
+            height: 600px;
+            width: 100%;
+            max-width: 1152px;
+            overflow-y: auto;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background-color: white;
+        }
+        .check-bracket { color: #3b82f6; font-weight: bold; width: 20px; display: inline-block; text-align: center; }
+
+        .tts-panel {
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+            background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+            border: 2px solid #93c5fd; border-radius: 16px;
+            padding: 12px 20px; margin-bottom: 14px;
+            width: 100%; max-width: 1152px; box-shadow: 0 2px 8px rgba(59,130,246,0.1);
+        }
+        .tts-section { display: flex; align-items: center; gap: 10px; }
+        .tts-label { font-weight: 900; color: #1d4ed8; font-size: 1rem; white-space: nowrap; }
+        .tts-select {
+            border: 2px solid #93c5fd; border-radius: 10px; padding: 6px 14px;
+            font-size: 0.95rem; color: #1e3a8a; background: white; cursor: pointer;
+            max-width: 230px; font-weight: bold; outline: none;
+        }
+        .tts-select:focus { border-color: #3b82f6; }
+        .tts-speed-btns { display: flex; gap: 6px; }
+        .tts-speed-btn {
+            border: 2px solid #93c5fd; border-radius: 8px; padding: 5px 12px;
+            font-size: 0.9rem; font-weight: bold; cursor: pointer;
+            background: white; color: #1d4ed8; transition: all 0.2s;
+        }
+        .tts-speed-btn:hover, .tts-speed-active {
+            background: #3b82f6; color: white; border-color: #2563eb;
+        }
+        .tts-btn-play {
+            background: #22c55e; color: white; border: none; border-radius: 10px;
+            padding: 8px 22px; font-size: 1.05rem; font-weight: bold;
+            cursor: pointer; transition: all 0.2s; white-space: nowrap;
+        }
+        .tts-btn-play:hover { background: #16a34a; }
+        .tts-btn-stop {
+            background: #f87171; color: white; border: none; border-radius: 10px;
+            padding: 8px 16px; font-size: 1.05rem; font-weight: bold;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .tts-btn-stop:hover { background: #dc2626; }
+        .tts-paragraph { transition: background 0.3s, padding-left 0.3s; border-radius: 10px; padding: 4px 10px; border-left: 4px solid transparent; }
+        .tts-speaking { background: #fefce8 !important; border-left: 5px solid #eab308 !important; padding-left: 14px !important; }
+        .tts-done { opacity: 0.5; }
+    </style>
+</head>
+<body>
+    <script>
+        const SLIDE_DATA = {
+            title: "Lesson 8: The Mystery of Colors",
+            subtitle: "Section 1",
+            warmup: {
+                question: "What is your favorite color?",
+                answerBase: "My favorite color is"
+            },
+            reading: [
+                "What is your favorite color?",
+                "Everything around us has its own color. The {pictograms} above are toilet signs. What do you think?",
+                "In Japan, blue has been for the {male} sign and red for the {female} sign since the 1964 Tokyo Olympics.",
+                "However, they are {reversed} above. We might be {confused} when we see them.",
+                "Like this, colors often {influence} our mind."
+            ],
+            translationPhrases: [
+                { en: "Everything around us has its own color.", ja: "私たちの周りのすべてのものは，それ自身の色を持っています。" },
+                { en: "The pictograms above are toilet signs.", ja: "上のピクトグラムはトイレのサインです。" },
+                { en: "In Japan, blue has been for the male sign", ja: "日本では，青は男性用サインに使われてきました" },
+                { en: "and red for the female sign", ja: "そして赤は女性用サインに" },
+                { en: "since the 1964 Tokyo Olympics.", ja: "1964年の東京オリンピック以来。" },
+                { en: "However, they are reversed above.", ja: "しかし，上ではそれらが逆になっています。" },
+                { en: "Like this, colors often influence our mind.", ja: "このように，色はよく私たちの心に影響を与えます。" }
+            ],
+            checks: [
+                { q: "1. The pictograms are the <span class='check-bracket'>(</span> {toilet} <span class='check-bracket'>)</span> signs with reversed colors." },
+                { q: "2. When did the roles of red and blue start in Japan?", sub: "— They started in the 1964 Tokyo <span class='check-bracket'>(</span> {Olympics} <span class='check-bracket'>)</span>." }
+            ],
+            newWords: [
+                { en: "pictogram", ja: "ピクトグラム（名）" },
+                { en: "toilet", ja: "トイレ（名）" },
+                { en: "female", ja: "女性の（形）" },
+                { en: "reverse", ja: "逆にする（動）" },
+                { en: "confused", ja: "困惑した（形）" },
+                { en: "influence", ja: "影響を与える（動）" },
+                { en: "Olympics", ja: "オリンピック（名）" }
+            ],
+            dialogue: {
+                target: "our mind",
+                options: ["our mind", "our appetite", "our behavior"]
+            }
+        };
+    </script>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-colors text-white justify-center text-center">
+        <h1 id="main-title" class="text-9xl font-black mb-8" style="text-shadow: 2px 4px 12px rgba(0,0,0,0.5);"></h1>
+        <p id="sub-title" class="text-4xl opacity-90" style="text-shadow: 1px 2px 6px rgba(0,0,0,0.4);"></p>
+    </div>
+
+    <!-- Slide 2: Warm Up -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-blue-600">Warm-up</h2>
+        <div class="content-box bg-blue-50 border border-blue-100 flex flex-col justify-center space-y-8 text-4xl">
+            <div class="bg-blue-100/50 p-8 rounded-2xl w-full">
+                <p class="text-blue-500 text-sm font-black uppercase mb-2">Teacher</p>
+                <p id="warmup-q" class="font-bold text-gray-800"></p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl w-full border-4 border-dashed border-gray-100">
+                <p class="text-gray-400 text-sm font-black uppercase mb-2">Student</p>
+                <p class="font-bold text-gray-800"><span id="warmup-a-base"></span> ____________________.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Reading Section -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-gray-900">Reading Section</h2>
+        <div id="reading-content-static" class="content-box bg-gray-50 border border-gray-100 text-reading"></div>
+    </div>
+
+    <!-- Slide 4: Reading + Listen (TTS) -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-gray-900">Reading <span style="color:#3b82f6;font-size:2rem;">🔊 Listen</span></h2>
+        <div class="tts-panel">
+            <div class="tts-section">
+                <span class="tts-label">🎙 Voice</span>
+                <select id="tts-voice-select" class="tts-select">
+                    <option value="">-- ブラウザ読み込み中 --</option>
+                </select>
+            </div>
+            <div class="tts-section">
+                <span class="tts-label">⚡ Speed</span>
+                <div class="tts-speed-btns">
+                    <button class="tts-speed-btn" data-rate="0.7" onclick="ttsSetRate(0.7)">🐢 Slow</button>
+                    <button class="tts-speed-btn tts-speed-active" data-rate="1.0" onclick="ttsSetRate(1.0)">🚶 Normal</button>
+                    <button class="tts-speed-btn" data-rate="1.3" onclick="ttsSetRate(1.3)">🏃 Fast</button>
+                    <button class="tts-speed-btn" data-rate="1.6" onclick="ttsSetRate(1.6)">🚀 V.Fast</button>
+                </div>
+            </div>
+            <div class="tts-section" style="margin-left:auto;">
+                <button id="tts-play-btn" class="tts-btn-play" onclick="ttsToggle()">▶ 読み上げ開始</button>
+                <button class="tts-btn-stop" onclick="ttsStop()">■ 停止</button>
+            </div>
+        </div>
+        <div id="reading-content-tts" class="content-box bg-gray-50 border border-gray-100 text-reading"></div>
+    </div>
+
+    <!-- Slide 5: New Words -->
+    <div class="slide bg-gray-900 text-white">
+        <h2 class="slide-title text-yellow-400">New Words</h2>
+        <div id="new-words-grid" class="content-box bg-gray-800 border-2 border-gray-700 grid grid-cols-2 md:grid-cols-3 gap-5"></div>
+    </div>
+
+    <!-- Slide 6: KEY WORDS -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-yellow-600">Key Words</h2>
+        <div class="w-full max-w-6xl">
+            <p style="font-size:1.2rem;color:#555;margin-bottom:18px;text-align:center;">絵に合うように，最も適する語を下から選んで（　　）に入れましょう。</p>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:20px;">
+
+                <!-- Card 1: Olympics（五輪） -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#ef4444;">&#10102;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#f5f3ff"/>
+                            <circle cx="47" cy="72" r="24" fill="none" stroke="#3b82f6" stroke-width="9"/>
+                            <circle cx="100" cy="72" r="24" fill="none" stroke="#1f2937" stroke-width="9"/>
+                            <circle cx="153" cy="72" r="24" fill="none" stroke="#ef4444" stroke-width="9"/>
+                            <circle cx="73" cy="100" r="24" fill="none" stroke="#eab308" stroke-width="9"/>
+                            <circle cx="127" cy="100" r="24" fill="none" stroke="#22c55e" stroke-width="9"/>
+                            <path d="M49,100 A24,24 0 0,1 97,100" stroke="#eab308" stroke-width="9" fill="none"/>
+                            <path d="M103,100 A24,24 0 0,1 151,100" stroke="#22c55e" stroke-width="9" fill="none"/>
+                            <path d="M76,72 A24,24 0 0,1 124,72" stroke="#1f2937" stroke-width="9" fill="none"/>
+                            <path d="M129,72 A24,24 0 0,1 177,72" stroke="#ef4444" stroke-width="9" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">Olympics</span> ）</div>
+                </div>
+
+                <!-- Card 2: mind（思考） -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#f59e0b;">&#10103;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fef9c3"/>
+                            <ellipse cx="100" cy="95" rx="48" ry="52" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+                            <ellipse cx="100" cy="72" rx="34" ry="26" fill="#fca5a5" stroke="#f43f5e" stroke-width="1.5"/>
+                            <path d="M78 68 Q88 60 98 68 Q108 76 118 68" stroke="#f43f5e" stroke-width="1.5" fill="none"/>
+                            <path d="M80 78 Q90 70 100 78 Q110 86 120 78" stroke="#f43f5e" stroke-width="1.5" fill="none"/>
+                            <line x1="100" y1="48" x2="100" y2="96" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,3"/>
+                            <circle cx="88" cy="107" r="4" fill="#374151"/>
+                            <circle cx="112" cy="107" r="4" fill="#374151"/>
+                            <path d="M88 120 Q100 130 112 120" stroke="#374151" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <circle cx="150" cy="30" r="6" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+                            <circle cx="162" cy="22" r="8" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+                            <circle cx="175" cy="14" r="10" fill="#fef9c3" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="169" y="19" font-size="12" fill="#f59e0b" font-weight="bold">💡</text>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">mind</span> ）</div>
+                </div>
+
+                <!-- Card 3: confused（困惑して） -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#22c55e;">&#10104;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#fff1f2"/>
+                            <circle cx="100" cy="68" r="32" fill="#fde68a" stroke="#ef4444" stroke-width="2"/>
+                            <ellipse cx="88" cy="62" rx="5" ry="6" fill="#374151"/>
+                            <ellipse cx="112" cy="62" rx="5" ry="6" fill="#374151"/>
+                            <line x1="80" y1="52" x2="96" y2="56" stroke="#374151" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="104" y1="56" x2="120" y2="52" stroke="#374151" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M85 82 Q92 77 100 82 Q108 87 115 82" stroke="#374151" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                            <text x="138" y="42" font-size="26" fill="#ef4444" font-weight="bold">?</text>
+                            <text x="50" y="38" font-size="20" fill="#ef4444" font-weight="bold">?</text>
+                            <text x="148" y="72" font-size="16" fill="#f97316" font-weight="bold">?</text>
+                            <rect x="74" y="102" width="52" height="42" rx="10" fill="#60a5fa"/>
+                            <line x1="74" y1="116" x2="46" y2="108" stroke="#60a5fa" stroke-width="12" stroke-linecap="round"/>
+                            <line x1="126" y1="116" x2="154" y2="108" stroke="#60a5fa" stroke-width="12" stroke-linecap="round"/>
+                            <circle cx="44" cy="107" r="8" fill="#fde68a"/>
+                            <circle cx="156" cy="107" r="8" fill="#fde68a"/>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">形</span>（ <span class="kw-answer">confused</span> ）</div>
+                </div>
+
+                <!-- Card 4: pictogram（ピクトグラム） -->
+                <div class="kw-card" onclick="this.querySelector('.kw-answer').classList.toggle('kw-show')">
+                    <div class="kw-num" style="background:#8b5cf6;">&#10105;</div>
+                    <div class="kw-illust">
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="160" rx="12" fill="#f0fdf4"/>
+                            <rect x="18" y="15" width="72" height="130" rx="10" fill="#3b82f6"/>
+                            <circle cx="54" cy="46" r="14" fill="white"/>
+                            <rect x="38" y="63" width="32" height="38" rx="6" fill="white"/>
+                            <rect x="38" y="101" width="13" height="32" rx="5" fill="white"/>
+                            <rect x="57" y="101" width="13" height="32" rx="5" fill="white"/>
+                            <rect x="110" y="15" width="72" height="130" rx="10" fill="#ef4444"/>
+                            <circle cx="146" cy="46" r="14" fill="white"/>
+                            <polygon points="128,65 164,65 174,142 118,142" fill="white"/>
+                        </svg>
+                    </div>
+                    <div class="kw-label"><span class="kw-pos">名</span>（ <span class="kw-answer">pictogram</span> ）</div>
+                </div>
+
+            </div>
+            <!-- Word bank -->
+            <div style="text-align:center;background:linear-gradient(135deg,#ecfdf5,#dbeafe);padding:14px 30px;border-radius:16px;border:2px solid #a7f3d0;font-size:1.5rem;font-weight:bold;color:#1e40af;letter-spacing:1px;">
+                Olympics &nbsp;/&nbsp; mind &nbsp;/&nbsp; confused &nbsp;/&nbsp; pictogram
+            </div>
+        </div>
+    </div>
+    <style>
+        .kw-card { background:white; border-radius:16px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08); border:2px solid #e5e7eb; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; position:relative; }
+        .kw-card:hover { transform:translateY(-4px); box-shadow:0 6px 20px rgba(0,0,0,0.12); }
+        .kw-num { position:absolute; top:8px; left:8px; width:30px; height:30px; border-radius:50%; color:white; font-size:1.1rem; font-weight:900; display:flex; align-items:center; justify-content:center; z-index:2; box-shadow:0 2px 4px rgba(0,0,0,0.2); }
+        .kw-illust { padding:8px; }
+        .kw-illust svg { width:100%; height:auto; border-radius:10px; }
+        .kw-label { text-align:center; padding:8px 12px 12px; font-size:1.3rem; font-weight:bold; color:#374151; border-top:1px solid #f3f4f6; }
+        .kw-pos { display:inline-block; background:#dbeafe; color:#1e40af; font-size:0.9rem; padding:2px 10px; border-radius:6px; margin-right:4px; font-weight:900; }
+        .kw-answer { color:transparent; border-bottom:3px solid #3b82f6; padding:0 8px; min-width:80px; display:inline-block; text-align:center; transition:color 0.3s; }
+        .kw-answer.kw-show { color:#ef4444 !important; }
+        .hint-btn { background:white; border:2px solid #6ee7b7; border-radius:10px; padding:7px 16px; font-size:1rem; font-weight:bold; color:#065f46; cursor:pointer; transition:all 0.2s; }
+        .hint-btn:hover { background:#22c55e; color:white; border-color:#16a34a; }
+        .comm-slot { color:#1d4ed8; border-bottom:3px solid #3b82f6; padding:0 6px; font-weight:900; }
+    </style>
+
+    <!-- Slide 7: Check -->
+    <div class="slide bg-yellow-50">
+        <div class="w-full max-w-6xl flex justify-between items-center mb-2">
+            <h2 class="slide-title text-orange-600 m-0">Check</h2>
+            <button onclick="revealAllCheck()" class="bg-orange-500 text-white px-6 py-2 rounded-xl font-bold hover:bg-orange-600 shadow-md transition text-lg">SHOW ALL ANSWERS</button>
+        </div>
+        <div id="check-content" class="content-box flex flex-col justify-center space-y-6 text-check border border-orange-100"></div>
+    </div>
+
+    <!-- Slide 8: Communicate -->
+    <div class="slide bg-green-50">
+        <h2 class="slide-title text-green-700">Communicate</h2>
+        <div class="content-box border border-green-100 flex flex-col justify-start space-y-5" style="padding:2rem;">
+
+            <!-- Part 1: 並べ替え -->
+            <div class="bg-white rounded-2xl border-2 border-green-200 p-5">
+                <p class="text-base font-black text-green-700 uppercase mb-3">① 並べかえて，正しい文を完成させましょう。</p>
+                <div style="font-size:1.7rem;font-weight:bold;color:#374151;margin-bottom:14px;">
+                    A: <span style="background:#fef9c3;border-radius:8px;padding:4px 14px;border:2px dashed #eab308;">known &nbsp;/&nbsp; have &nbsp;/&nbsp; we &nbsp;/&nbsp; How long</span>
+                    <span style="color:#374151;"> each other?</span>
+                </div>
+                <div id="scramble-answer" style="font-size:1.7rem;font-weight:bold;opacity:0;transition:opacity 0.4s;color:#16a34a;padding-left:8px;">
+                    → A: <span style="color:#ef4444;">How long have we known</span> each other?
+                </div>
+                <button onclick="toggleScrambleAnswer()" id="scramble-btn"
+                    style="margin-top:10px;background:#22c55e;color:white;border:none;border-radius:10px;padding:8px 24px;font-size:1rem;font-weight:bold;cursor:pointer;">
+                    答えを見る
+                </button>
+            </div>
+
+            <!-- Part 2: ペアワーク対話 -->
+            <div class="bg-white rounded-2xl border-2 border-blue-200 p-5">
+                <p class="text-base font-black text-blue-700 uppercase mb-3">② 下線部を変えて，ペアで練習しましょう。</p>
+                <div style="font-size:1.6rem;line-height:2.1;font-weight:bold;">
+                    <div class="comm-line" style="background:#f0fdf4;border-left:6px solid #22c55e;padding:8px 18px;border-radius:8px;margin-bottom:8px;">
+                        <span style="color:#16a34a;font-weight:900;">A:</span>
+                        How long have we known each other?
+                    </div>
+                    <div class="comm-line" style="background:#eff6ff;border-left:6px solid #3b82f6;padding:8px 18px;border-radius:8px;margin-bottom:8px;">
+                        <span style="color:#1d4ed8;font-weight:900;">B:</span>
+                        For about <span id="slot-duration" class="comm-slot">five years</span>.
+                    </div>
+                    <div class="comm-line" style="background:#f0fdf4;border-left:6px solid #22c55e;padding:8px 18px;border-radius:8px;margin-bottom:8px;">
+                        <span style="color:#16a34a;font-weight:900;">A:</span>
+                        We <span style="text-decoration:underline;text-decoration-thickness:3px;color:#ef4444;">influence</span> each other in good ways.
+                    </div>
+                    <div class="comm-line" style="background:#eff6ff;border-left:6px solid #3b82f6;padding:8px 18px;border-radius:8px;">
+                        <span style="color:#1d4ed8;font-weight:900;">B:</span>
+                        Yes, we often <span id="slot-activity" class="comm-slot">study together</span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hints -->
+            <div style="background:linear-gradient(135deg,#ecfdf5,#dbeafe);border:2px solid #a7f3d0;border-radius:14px;padding:12px 20px;">
+                <p style="font-size:0.95rem;font-weight:900;color:#065f46;margin-bottom:8px;">HINTS — クリックして入れ替えよう</p>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <button class="hint-btn" onclick="setCommSlots('five years','study together')">five years / study together</button>
+                    <button class="hint-btn" onclick="setCommSlots('a long time','talk a lot')">a long time / talk a lot</button>
+                    <button class="hint-btn" onclick="setCommSlots('two months','practice sports')">two months / practice sports</button>
+                    <button class="hint-btn" onclick="setCommSlots('since last spring','hang out')">since last spring / hang out</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Slide 9: Quiz Mode -->
+    <div class="slide bg-blue-50">
+        <div class="w-full max-w-6xl flex justify-between items-center mb-4">
+            <h2 class="slide-title text-blue-900 m-0">Quiz Mode</h2>
+            <button onclick="revealAllQuiz()" class="bg-red-500 text-white px-6 py-2 rounded-xl font-bold hover:bg-red-600 shadow-md transition">SHOW ALL ANSWERS</button>
+        </div>
+        <div id="reading-content-quiz" class="content-box border border-blue-100 text-reading"></div>
+    </div>
+
+    <!-- Slide 10: Phrase Review -->
+    <div class="slide bg-indigo-50">
+        <h2 class="slide-title text-indigo-800">Phrase Review</h2>
+        <div id="translation-content" class="content-box border border-indigo-100 overflow-y-auto"></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 10</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const TOTAL_SLIDES = 10;
+
+        function makeSlashable(container, html) {
+            container.innerHTML = html;
+            const walk = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walk.nextNode()) { textNodes.push(node); }
+            textNodes.forEach(textNode => {
+                const parent = textNode.parentNode;
+                const text = textNode.textContent;
+                const tokens = text.split(/(\s+)/);
+                const fragment = document.createDocumentFragment();
+                tokens.forEach(token => {
+                    if (/\s+/.test(token)) {
+                        const span = document.createElement('span');
+                        span.className = 'slashable-char slashable-space';
+                        span.innerHTML = '&nbsp;';
+                        span.onclick = (e) => { e.stopPropagation(); span.classList.toggle('slash-mark'); };
+                        fragment.appendChild(span);
+                    } else if (token.length > 0) {
+                        const wordWrapper = document.createElement('span');
+                        wordWrapper.className = 'word-wrapper';
+                        token.split('').forEach(char => {
+                            const charSpan = document.createElement('span');
+                            charSpan.className = 'slashable-char';
+                            charSpan.textContent = char;
+                            charSpan.onclick = (e) => { e.stopPropagation(); charSpan.classList.toggle('slash-mark'); };
+                            wordWrapper.appendChild(charSpan);
+                        });
+                        fragment.appendChild(wordWrapper);
+                    }
+                });
+                parent.replaceChild(fragment, textNode);
+            });
+        }
+
+        function createWordCard(word, containerId) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[200px]";
+            div.onclick = function() { this.querySelector('.ja-text').classList.toggle('opacity-0'); };
+            div.innerHTML = `
+                <p class="text-3xl font-bold mb-4">${word.en}</p>
+                <p class="ja-text text-3xl text-yellow-400 opacity-0 transition-opacity font-bold">${word.ja}</p>
+            `;
+            container.appendChild(div);
+        }
+
+        let ttsSpeaking = false;
+        let ttsCurrentRate = 1.0;
+        let ttsVoices = [];
+        let ttsParagraphs = [];
+
+        const TTS_VOICE_PROFILES = [
+            { label: '🟢 Google Chrome Voices',   match: v => /^Google/i.test(v.name) && v.lang.startsWith('en') },
+            { label: '🇺🇸 OS: American English',  match: v => !(/^Google/i.test(v.name)) && v.lang === 'en-US' },
+            { label: '🇬🇧 OS: British English',   match: v => !(/^Google/i.test(v.name)) && v.lang === 'en-GB' },
+            { label: '🇦🇺 OS: Australian',        match: v => !(/^Google/i.test(v.name)) && v.lang === 'en-AU' },
+            { label: '🌏 OS: Other English',      match: v => !(/^Google/i.test(v.name)) && v.lang.startsWith('en') && !['en-US','en-GB','en-AU'].includes(v.lang) },
+        ];
+
+        function ttsLoadVoices() {
+            ttsVoices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+            const sel = document.getElementById('tts-voice-select');
+            if (!sel) return;
+            sel.innerHTML = '';
+            let firstGoogleVoiceName = null;
+            TTS_VOICE_PROFILES.forEach(profile => {
+                const candidates = ttsVoices.filter(profile.match);
+                if (candidates.length === 0) return;
+                const group = document.createElement('optgroup');
+                group.label = profile.label;
+                candidates.forEach(v => {
+                    const opt = document.createElement('option');
+                    opt.value = v.name;
+                    const star = /^Google/i.test(v.name) ? '★ ' : '';
+                    opt.textContent = star + v.name + ' (' + v.lang + ')';
+                    group.appendChild(opt);
+                    if (/^Google/i.test(v.name) && firstGoogleVoiceName === null) firstGoogleVoiceName = v.name;
+                });
+                sel.appendChild(group);
+            });
+            if (sel.options.length === 0) {
+                const opt = document.createElement('option');
+                opt.value = '__default__';
+                opt.textContent = '(ブラウザデフォルト)';
+                sel.appendChild(opt);
+            }
+            if (firstGoogleVoiceName) sel.value = firstGoogleVoiceName;
+        }
+
+        function ttsInitContent() {
+            const container = document.getElementById('reading-content-tts');
+            if (!container) return;
+            container.innerHTML = '';
+            ttsParagraphs = [];
+            SLIDE_DATA.reading.forEach((line, i) => {
+                const p = document.createElement('p');
+                p.className = 'mb-6 tts-paragraph';
+                p.dataset.index = i;
+                p.innerHTML = line.replace(/\{([^}]+)\}/g, '<span class="highlight-static">$1</span>');
+                container.appendChild(p);
+                ttsParagraphs.push(p);
+            });
+        }
+
+        function ttsPlainText(line) { return line.replace(/\{([^}]+)\}/g, '$1'); }
+
+        function ttsGetSelectedVoice() {
+            const sel = document.getElementById('tts-voice-select');
+            if (!sel || sel.value === '__default__') return null;
+            return ttsVoices.find(v => v.name === sel.value) || null;
+        }
+
+        function ttsSetRate(rate) {
+            ttsCurrentRate = rate;
+            document.querySelectorAll('.tts-speed-btn').forEach(btn => {
+                btn.classList.toggle('tts-speed-active', parseFloat(btn.dataset.rate) === rate);
+            });
+        }
+
+        function ttsHighlight(index) {
+            ttsParagraphs.forEach((p, i) => {
+                p.classList.remove('tts-speaking', 'tts-done');
+                if (i === index) p.classList.add('tts-speaking');
+                else if (index >= 0 && i < index) p.classList.add('tts-done');
+            });
+            if (index >= 0 && ttsParagraphs[index]) ttsParagraphs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function ttsSpeak() {
+            window.speechSynthesis.cancel();
+            ttsSpeaking = true;
+            const playBtn = document.getElementById('tts-play-btn');
+            if (playBtn) playBtn.textContent = '⏸ 一時停止';
+            function speakNext(i) {
+                if (i >= SLIDE_DATA.reading.length) {
+                    ttsHighlight(-1);
+                    ttsParagraphs.forEach(p => p.classList.remove('tts-done'));
+                    ttsSpeaking = false;
+                    if (playBtn) playBtn.textContent = '▶ 読み上げ開始';
+                    return;
+                }
+                ttsHighlight(i);
+                const utter = new SpeechSynthesisUtterance(ttsPlainText(SLIDE_DATA.reading[i]));
+                utter.rate = ttsCurrentRate;
+                const voice = ttsGetSelectedVoice();
+                if (voice) utter.voice = voice;
+                utter.onend = () => { if (ttsSpeaking) speakNext(i + 1); };
+                utter.onerror = () => { if (ttsSpeaking) speakNext(i + 1); };
+                window.speechSynthesis.speak(utter);
+            }
+            speakNext(0);
+        }
+
+        function ttsToggle() {
+            if (ttsSpeaking) {
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                    document.getElementById('tts-play-btn').textContent = '⏸ 一時停止';
+                } else {
+                    window.speechSynthesis.pause();
+                    document.getElementById('tts-play-btn').textContent = '▶ 再開';
+                }
+            } else { ttsSpeak(); }
+        }
+
+        function ttsStop() {
+            window.speechSynthesis.cancel();
+            ttsSpeaking = false;
+            ttsHighlight(-1);
+            ttsParagraphs.forEach(p => p.classList.remove('tts-done'));
+            const playBtn = document.getElementById('tts-play-btn');
+            if (playBtn) playBtn.textContent = '▶ 読み上げ開始';
+        }
+
+        function initApp() {
+            document.getElementById('main-title').innerText = SLIDE_DATA.title;
+            document.getElementById('sub-title').innerText = SLIDE_DATA.subtitle;
+            document.getElementById('warmup-q').innerText = SLIDE_DATA.warmup.question;
+            document.getElementById('warmup-a-base').innerText = SLIDE_DATA.warmup.answerBase;
+
+            const readingStatic = document.getElementById('reading-content-static');
+            readingStatic.innerHTML = '';
+            SLIDE_DATA.reading.forEach(line => {
+                const p = document.createElement('p');
+                p.className = "mb-6";
+                const html = line.replace(/\{([^}]+)\}/g, '<span class="highlight-static">$1</span>');
+                makeSlashable(p, html);
+                readingStatic.appendChild(p);
+            });
+
+            const checkContent = document.getElementById('check-content');
+            checkContent.innerHTML = '';
+            SLIDE_DATA.checks.forEach(item => {
+                const div = document.createElement('div');
+                div.className = "bg-white p-6 rounded-2xl border border-orange-100 w-full";
+                let qHtml = item.q.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                let html = `<p class="font-bold">${qHtml}</p>`;
+                if (item.sub) {
+                    let subHtml = item.sub.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                    html += `<p class="mt-2 ml-10 text-gray-600 font-medium">${subHtml}</p>`;
+                }
+                div.innerHTML = html;
+                checkContent.appendChild(div);
+            });
+
+            document.getElementById('new-words-grid').innerHTML = '';
+            SLIDE_DATA.newWords.forEach(word => createWordCard(word, 'new-words-grid'));
+
+            const readingQuiz = document.getElementById('reading-content-quiz');
+            readingQuiz.innerHTML = '';
+            SLIDE_DATA.reading.forEach(line => {
+                const p = document.createElement('p');
+                p.className = "mb-6";
+                p.innerHTML = line.replace(/\{([^}]+)\}/g, '<span class="hidden-answer" onclick="this.classList.toggle(\'show\')">$1</span>');
+                readingQuiz.appendChild(p);
+            });
+
+            const transContent = document.getElementById('translation-content');
+            transContent.innerHTML = '';
+            SLIDE_DATA.translationPhrases.forEach(phrase => {
+                const card = document.createElement('div');
+                card.className = "phrase-card";
+                card.onclick = () => card.classList.toggle('active');
+                card.innerHTML = `<div class="phrase-en">${phrase.en}</div><div class="phrase-ja">${phrase.ja}</div>`;
+                transContent.appendChild(card);
+            });
+
+            ttsInitContent();
+            ttsLoadVoices();
+            if (typeof window.speechSynthesis !== 'undefined') {
+                window.speechSynthesis.onvoiceschanged = ttsLoadVoices;
+            }
+            updateSlideDisplay();
+        }
+
+        function revealAllQuiz() {
+            const answers = document.querySelectorAll('#reading-content-quiz .hidden-answer');
+            const anyHidden = Array.from(answers).some(a => !a.classList.contains('show'));
+            answers.forEach(a => a.classList.toggle('show', anyHidden));
+        }
+
+        function revealAllCheck() {
+            const answers = document.querySelectorAll('#check-content .hidden-answer');
+            const anyHidden = Array.from(answers).some(a => !a.classList.contains('show'));
+            answers.forEach(a => a.classList.toggle('show', anyHidden));
+        }
+
+        let scrambleRevealed = false;
+        function toggleScrambleAnswer() {
+            scrambleRevealed = !scrambleRevealed;
+            const ans = document.getElementById('scramble-answer');
+            const btn = document.getElementById('scramble-btn');
+            ans.style.opacity = scrambleRevealed ? '1' : '0';
+            btn.textContent = scrambleRevealed ? '答えを隠す' : '答えを見る';
+            btn.style.background = scrambleRevealed ? '#ef4444' : '#22c55e';
+        }
+
+        function setCommSlots(duration, activity) {
+            document.getElementById('slot-duration').textContent = duration;
+            document.getElementById('slot-activity').textContent = activity;
+        }
+
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${slides.length}`;
+            if (typeof ttsStop === 'function') ttsStop();
+        }
+
+        function nextSlide() { if (currentSlide < TOTAL_SLIDES - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>

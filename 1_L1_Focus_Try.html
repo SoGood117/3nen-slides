@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: The Beautiful Scenery - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 20px 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .slide.active { display: flex; }
+
+        /* タイトル背景：オーロラ */
+        .bg-aurora {
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&q=80&w=1600') center/cover;
+        }
+
+        .slide-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .content-box {
+            height: 600px;
+            width: 100%;
+            max-width: 1152px;
+            overflow-y: auto;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            background-color: white;
+        }
+
+        /* 隠し答え */
+        .hidden-answer {
+            display: inline-block;
+            color: transparent !important;
+            border-bottom: 3px solid #3b82f6 !important;
+            padding: 0 8px;
+            margin: 0 4px;
+            cursor: pointer;
+            min-width: 100px;
+            text-align: center;
+            vertical-align: baseline;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .hidden-answer.show {
+            color: #ef4444 !important;
+            font-weight: bold;
+        }
+
+        /* Focus スライド */
+        .example-sentence {
+            font-size: 2rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+        .example-ja {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        .keyword { color: #ef4444; font-weight: 900; }
+
+        .grammar-box {
+            background: #f0f9ff;
+            border-left: 6px solid #3b82f6;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 1.2rem;
+            font-size: 1.25rem;
+            line-height: 1.8;
+        }
+        .qa-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 0.6rem;
+        }
+        .qa-label {
+            background: #3b82f6;
+            color: white;
+            font-size: 1rem;
+            font-weight: 900;
+            padding: 2px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            margin-top: 4px;
+        }
+        .qa-label.neg { background: #ef4444; }
+        .qa-text { font-size: 1.5rem; font-weight: bold; line-height: 1.6; }
+        .qa-ja { font-size: 1.1rem; color: #6b7280; margin-left: 60px; margin-bottom: 0.8rem; }
+
+        /* 活用表 */
+        .conj-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        .conj-table th {
+            background: #1e40af;
+            color: white;
+            padding: 8px 12px;
+            text-align: center;
+            font-weight: 900;
+        }
+        .conj-table td {
+            border: 1px solid #dbeafe;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        .conj-table tr:nth-child(even) td { background: #eff6ff; }
+        .conj-table .subj { text-align: left; font-weight: bold; }
+        .conj-table .be { color: #2563eb; font-weight: 900; }
+        .conj-table .verb { color: #16a34a; font-weight: bold; }
+        .conj-table .row-header {
+            background: #dbeafe;
+            color: #1e3a8a;
+            font-weight: 900;
+        }
+
+        /* Try スライド */
+        .try-q {
+            font-size: 1.8rem;
+            line-height: 1.7;
+            margin-bottom: 0.2rem;
+            font-weight: bold;
+        }
+        .try-ja {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 1.3rem;
+        }
+        .word-bank {
+            display: inline-flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 12px 20px;
+            background: #fef3c7;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .word-bank span {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #92400e;
+        }
+        .try-arrow {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin: 4px 0 4px 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-aurora text-white justify-center text-center">
+        <h1 class="text-8xl font-black mb-8">Lesson 1: The Beautiful Scenery</h1>
+        <p class="text-4xl opacity-90">Focus & Try</p>
+    </div>
+
+    <!-- Slide 2: Focus ① be動詞の現在形 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-teal-600">Focus ①</h2>
+        <div class="content-box bg-teal-50 border border-teal-100">
+            <p class="text-xl font-black text-teal-700 mb-4">「〜です」「〜がいます、あります」　be動詞の現在形</p>
+
+            <p class="example-sentence">This <span class="keyword">is</span> an aurora.</p>
+            <p class="example-ja">これはオーロラです。</p>
+
+            <div class="grammar-box">
+                be動詞は前後の語句を<strong>イコール（＝）</strong>で結んだり、主語の<strong>情報や存在</strong>を表したりします。
+            </div>
+
+            <div class="qa-row">
+                <span class="qa-label">疑問文</span>
+                <span class="qa-text"><span class="keyword">Are</span> you a baseball fan?</span>
+            </div>
+            <p class="qa-ja">あなたは野球のファンですか。</p>
+
+            <div class="qa-row">
+                <span class="qa-label neg">否定文</span>
+                <span class="qa-text">I <span class="keyword">am not</span> a baseball fan.</span>
+            </div>
+            <p class="qa-ja">私は野球のファンではありません。</p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus ② 一般動詞の現在形 + 活用表 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-teal-600">Focus ②</h2>
+        <div class="content-box bg-teal-50 border border-teal-100" style="padding:2rem;">
+            <p class="text-xl font-black text-teal-700 mb-3">「〜します」　一般動詞の現在形</p>
+
+            <p class="example-sentence">Mt. Fuji <span class="keyword">looks</span> beautiful.</p>
+            <p class="example-ja" style="margin-bottom:0.8rem;">富士山は美しく見えます。</p>
+
+            <div class="grammar-box" style="margin-bottom:0.8rem;">
+                一般動詞は主語の<strong>動作や状態</strong>を表します。主語が<strong>三人称・単数</strong>のときは動詞のうしろに <strong>-(e)s</strong> をつけます。
+            </div>
+
+            <table class="conj-table">
+                <thead>
+                    <tr>
+                        <th>主語</th>
+                        <th>be動詞</th>
+                        <th>一般動詞の例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="row-header" rowspan="3">単数</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="subj">I</td>
+                        <td class="be">am</td>
+                        <td class="verb">start / go / study</td>
+                    </tr>
+                    <tr>
+                        <td class="subj">You</td>
+                        <td class="be">are</td>
+                        <td class="verb">start / go / study</td>
+                    </tr>
+                    <tr>
+                        <td class="subj">He / She / It / Mike など</td>
+                        <td class="be">is</td>
+                        <td class="verb">start<strong>s</strong> / go<strong>es</strong> / studi<strong>es</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="row-header">複数</td>
+                        <td class="subj">We / You / They / Students など</td>
+                        <td class="be">are</td>
+                        <td class="verb">start / go / study</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 4: Try 1 - am/are/is 穴埋め -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように，（　）に <strong>am, are, is</strong> のいずれかを入れましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① There ( <span class="hidden-answer" onclick="this.classList.toggle('show')">are</span> ) some places with beautiful night scenery.</p>
+                <p class="try-ja">美しい夜景を見られる場所がいくつかあります。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② Hakodate ( <span class="hidden-answer" onclick="this.classList.toggle('show')">is</span> ) one of them.</p>
+                <p class="try-ja">函館はその１つです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I ( <span class="hidden-answer" onclick="this.classList.toggle('show')">am</span> ) always surprised at the beauty.</p>
+                <p class="try-ja">私はいつもその美しさに驚いています。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Try 2 - 語句の並べかえ -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように，（　）内の語句を並べかえましょう。</p>
+
+            <div class="mb-5">
+                <p class="try-q">① Many foreign ( visit / people / Mt. Fuji ).</p>
+                <p class="try-arrow">→ Many foreign <span class="hidden-answer" onclick="this.classList.toggle('show')">people visit Mt. Fuji</span>.</p>
+                <p class="try-ja">たくさんの外国人が富士山を訪れます。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">② They ( a sea of / see / clouds ).</p>
+                <p class="try-arrow">→ They <span class="hidden-answer" onclick="this.classList.toggle('show')">see a sea of clouds</span>.</p>
+                <p class="try-ja">彼らは雲海を見ます。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">③ That ( is / with / a place ) beautiful scenery.</p>
+                <p class="try-arrow">→ That <span class="hidden-answer" onclick="this.classList.toggle('show')">is a place with</span> beautiful scenery.</p>
+                <p class="try-ja">そこは美しい景色が見られる場所です。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Try 3 - 語句選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-3">日本語に合うように，最も適する語を下から選び，（　）に入れましょう。</p>
+            <div class="word-bank mb-5">
+                <span>artificial</span><span>/</span><span>ruins</span><span>/</span><span>romantic</span>
+            </div>
+
+            <div class="mb-5">
+                <p class="try-q">① We see the castle ( <span class="hidden-answer" onclick="this.classList.toggle('show')">ruins</span> ).</p>
+                <p class="try-ja">私たちは城跡を見ます。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">② The castle is ( <span class="hidden-answer" onclick="this.classList.toggle('show')">artificial</span> ), but very beautiful.</p>
+                <p class="try-ja">そのお城は人工的なものですが、とても美しいです。</p>
+            </div>
+            <div class="mb-5">
+                <p class="try-q">③ At night, the castle with lights is ( <span class="hidden-answer" onclick="this.classList.toggle('show')">romantic</span> ).</p>
+                <p class="try-ja">夜にライトアップされたお城はロマンチックです。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
