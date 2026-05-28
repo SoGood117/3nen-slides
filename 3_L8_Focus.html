@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 8: The Mystery of Colors - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 20px 40px; flex-direction: column; align-items: center; }
+        .slide.active { display: flex; }
+        .bg-colors { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=1600') center/cover; }
+        .slide-title { font-size: 3rem; font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .content-box { height: 600px; width: 100%; max-width: 1152px; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #ea580c !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 120px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
+        .hidden-answer.show { color: #ea580c !important; font-weight: bold; }
+        .example-sentence { font-size: 1.9rem; line-height: 1.6; margin-bottom: 0.5rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: 1.2rem; color: #6b7280; margin-bottom: 1.2rem; }
+        .keyword { color: #ea580c; font-weight: 900; }
+        .grammar-box { background: #fff7ed; border-left: 6px solid #ea580c; padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 1.2rem; font-size: 1.25rem; line-height: 1.8; }
+        .try-q { font-size: 1.8rem; line-height: 1.6; margin-bottom: 0.3rem; font-weight: bold; }
+        .try-ja { font-size: 1.2rem; color: #6b7280; margin-bottom: 1.2rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 12px 20px; background: #fef3c7; border-radius: 12px; margin-bottom: 1.5rem; }
+        .word-bank span { font-size: 1.4rem; font-weight: bold; color: #92400e; }
+        .focus-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+        .focus-table th { background: #fff7ed; color: #ea580c; font-size: 1.1rem; padding: 8px 12px; text-align: left; border: 1px solid #fed7aa; }
+        .focus-table td { padding: 10px 12px; border: 1px solid #fed7aa; font-size: 1.25rem; vertical-align: top; }
+        .focus-table .label-cell { font-size: 1.05rem; color: #9a3412; font-weight: bold; background: #fff7ed; width: 200px; }
+        .focus-table .ja-cell { font-size: 1.05rem; color: #6b7280; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-colors text-white justify-center text-center">
+        <h1 class="text-7xl font-black mb-8 leading-tight">Lesson 8: The Mystery of Colors</h1>
+        <p class="text-4xl opacity-90">Focus & Try</p>
+    </div>
+
+    <!-- Slide 2: Focus 1 - 現在完了 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 1</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「〜している」「〜したことがある」「〜したところだ」　現在完了</p>
+
+            <p class="example-sentence">Blue <span class="keyword">has been</span> for the male sign and red for the female sign since the 1964 Tokyo Olympics.</p>
+            <p class="example-ja">1964年の東京オリンピックから、青は男性用サイン、赤は女性用サインに用いられています。</p>
+
+            <div class="grammar-box">
+                <strong>&lt;have＋過去分詞&gt;</strong> で次のような意味を表します。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <td class="label-cell">継続用法<br><span style="font-size:0.9rem;font-weight:normal;">（今までずっと〜している）</span></td>
+                    <td>
+                        <p class="font-bold">I <span class="keyword">have liked</span> the idol group for many years.</p>
+                        <p class="ja-cell">私は長年ずっと、そのアイドルグループが好きです。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">経験用法<br><span style="font-size:0.9rem;font-weight:normal;">（今までに〜したことがある）</span></td>
+                    <td>
+                        <p class="font-bold">I <span class="keyword">have climbed</span> Mt. Fuji three times.</p>
+                        <p class="ja-cell">私は富士山に3回登ったことがあります。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">完了・結果用法<br><span style="font-size:0.9rem;font-weight:normal;">（〜したところだ / 〜してしまった）</span></td>
+                    <td>
+                        <p class="font-bold">I <span class="keyword">have</span> already <span class="keyword">finished</span> my homework.</p>
+                        <p class="ja-cell">私はすでに宿題を終えてしまいました。</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus 2 - 現在完了進行形 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 2</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「ずっと〜している」　現在完了進行形</p>
+
+            <p class="example-sentence">Since early times, colors <span class="keyword">have been playing</span> an important role in our lives.</p>
+            <p class="example-ja">遠い昔からずっと、色は私たちの生活の中で重要な役割を果たしてきています。</p>
+
+            <div class="grammar-box">
+                <strong>&lt;have＋been＋〜ing&gt;</strong> で過去に始まった「動作」が現在まで継続していることを表します。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <th>形</th>
+                    <th>例文</th>
+                    <th>特徴</th>
+                </tr>
+                <tr>
+                    <td class="label-cell">現在完了<br>（継続用法）</td>
+                    <td>
+                        <p class="font-bold">I <span class="keyword">have lived</span> in Kamakura for ten years.</p>
+                        <p class="ja-cell">私は鎌倉に10年間ずっと住んでいます。</p>
+                    </td>
+                    <td class="text-center font-bold text-orange-600" style="width:100px;">状態の継続</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">現在完了進行形</td>
+                    <td>
+                        <p class="font-bold">I <span class="keyword">have been playing</span> tennis for two hours.</p>
+                        <p class="ja-cell">私は2時間ずっとテニスをしています。</p>
+                    </td>
+                    <td class="text-center font-bold text-orange-600">動作の継続</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 4: TRY 1 - 現在完了・現在完了進行形 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語句を適切な形に変えて、現在完了か現在完了進行形の文を作りましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① I ( want → <span class="hidden-answer" onclick="this.classList.toggle('show')">have wanted</span> ) to be a professional golfer since I was a child.</p>
+                <p class="try-ja">私は子どもの頃からプロのゴルファーになりたいと思っています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② But I ( never be → <span class="hidden-answer" onclick="this.classList.toggle('show')">have never been</span> ) to a golf course.</p>
+                <p class="try-ja">しかし、今まで一度もゴルフコースに行ったことがありません。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I ( practice → <span class="hidden-answer" onclick="this.classList.toggle('show')">have been practicing</span> ) golf at a driving range for ten years.</p>
+                <p class="try-ja">10年間ゴルフ練習場で練習をしています。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: TRY 2 - 語句選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>noticed</span><span>/</span><span>reversed</span><span>/</span><span>confused</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① The signs for men and women in the toilet were ( <span class="hidden-answer" onclick="this.classList.toggle('show')">reversed</span> ).</p>
+                <p class="try-ja">トイレで男性用と女性用のサインが逆になっていました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② I was ( <span class="hidden-answer" onclick="this.classList.toggle('show')">confused</span> ) when I saw them.</p>
+                <p class="try-ja">私はそれらを見てとまどってしまいました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I think someone has already ( <span class="hidden-answer" onclick="this.classList.toggle('show')">noticed</span> ) that.</p>
+                <p class="try-ja">だれかがすでにそれに気づいていると思うのですが。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: TRY 3 - 語句並べかえ -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語句を並べかえましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① ( the weather report / according / to ), it will be cloudy tomorrow.</p>
+                <p class="try-q" style="margin-top:8px;">→ <span class="hidden-answer" onclick="this.classList.toggle('show')">According to the weather report</span>, it will be cloudy tomorrow.</p>
+                <p class="try-ja">天気予報によると、明日はくもりです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② It ( to / is / likely ) rain in some places.</p>
+                <p class="try-q" style="margin-top:8px;">→ It <span class="hidden-answer" onclick="this.classList.toggle('show')">is likely to</span> rain in some places.</p>
+                <p class="try-ja">所によっては雨が降りそうです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ Sometimes the sound of rain ( calm / makes / us ).</p>
+                <p class="try-q" style="margin-top:8px;">→ Sometimes the sound of rain <span class="hidden-answer" onclick="this.classList.toggle('show')">makes us calm</span>.</p>
+                <p class="try-ja">時には雨音は私たちを落ち着かせてくれます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
