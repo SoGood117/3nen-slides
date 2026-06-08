@@ -24,8 +24,8 @@
                 #22c55e 50%, #3b82f6 66%, #8b5cf6 82%, #ec4899 100%);
         }
 
-        .text-reading { font-size: 2.4rem; line-height: 1.8; text-align: center; }
-        .text-check { font-size: 2.6rem; line-height: 1.5; text-align: center; }
+        .text-reading { font-size: clamp(1.4rem, 3vh, 2.4rem); line-height: 1.8; text-align: center; }
+        .text-check { font-size: clamp(1.5rem, 3.2vh, 2.6rem); line-height: 1.5; text-align: center; }
         .word-wrapper { display: inline-block; white-space: nowrap; }
         .slashable-char {
             display: inline-block;
@@ -84,11 +84,11 @@
             width: 100%;
         }
         .phrase-card:hover { border-color: #3b82f6; transform: translateX(5px); }
-        .phrase-en { font-size: 2.0rem; font-weight: bold; color: #1f2937; }
-        .phrase-ja { font-size: 1.7rem; color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
+        .phrase-en { font-size: clamp(1.2rem, 2.5vh, 2.0rem); font-weight: bold; color: #1f2937; }
+        .phrase-ja { font-size: clamp(1.0rem, 2.1vh, 1.7rem); color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
         .phrase-card.active .phrase-ja { opacity: 1; }
         .slide-title {
-            font-size: 3.5rem;
+            font-size: clamp(2.0rem, 4.5vh, 3.5rem);
             font-weight: 900;
             margin-bottom: 0.75rem;
             text-align: center;
