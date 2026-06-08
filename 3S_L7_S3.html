@@ -16,8 +16,8 @@
         .slide.active { display: flex; }
         .bg-ai { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&q=80&w=1600') center/cover; }
 
-        .text-reading { font-size: 2.4rem; line-height: 1.8; text-align: center; }
-        .text-check { font-size: 2.6rem; line-height: 1.5; text-align: center; }
+        .text-reading { font-size: clamp(1.4rem, 3vh, 2.4rem); line-height: 1.8; text-align: center; }
+        .text-check { font-size: clamp(1.5rem, 3.2vh, 2.6rem); line-height: 1.5; text-align: center; }
         .word-wrapper { display: inline-block; white-space: nowrap; }
         .slashable-char { display: inline-block; cursor: pointer; position: relative; padding: 0 1px; transition: background 0.2s; }
         .slashable-char:hover { background-color: rgba(59,130,246,0.1); }
@@ -28,10 +28,10 @@
         .hidden-answer.show { color: #ef4444 !important; font-weight: bold; }
         .phrase-card { background: white; border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; border: 2px solid #e5e7eb; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; width: 100%; }
         .phrase-card:hover { border-color: #3b82f6; transform: translateX(5px); }
-        .phrase-en { font-size: 2.0rem; font-weight: bold; color: #1f2937; }
-        .phrase-ja { font-size: 1.7rem; color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
+        .phrase-en { font-size: clamp(1.2rem, 2.5vh, 2.0rem); font-weight: bold; color: #1f2937; }
+        .phrase-ja { font-size: clamp(1.0rem, 2.1vh, 1.7rem); color: #3b82f6; font-weight: 900; margin-top: 6px; opacity: 0; transition: opacity 0.3s; }
         .phrase-card.active .phrase-ja { opacity: 1; }
-        .slide-title { font-size: 3.5rem; font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
         .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
         .check-bracket { color: #3b82f6; font-weight: bold; width: 20px; display: inline-block; text-align: center; }
         .tts-panel { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; background: linear-gradient(135deg,#eff6ff,#f0fdf4); border: 2px solid #93c5fd; border-radius: 16px; padding: 12px 20px; margin-bottom: 14px; width: 100%; max-width: 100%; box-shadow: 0 2px 8px rgba(59,130,246,0.1); }
