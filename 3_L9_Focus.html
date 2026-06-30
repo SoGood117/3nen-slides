@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: Street Performers - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 20px 16px 80px; flex-direction: column; align-items: center; }
+        .slide.active { display: flex; }
+        .bg-stage { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f59e0b 100%); }
+        .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #ea580c !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 120px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
+        .hidden-answer.show { color: #ea580c !important; font-weight: bold; }
+        .example-sentence { font-size: 2.4rem; line-height: 1.6; margin-bottom: 0.5rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: 1.7rem; color: #6b7280; margin-bottom: 1.2rem; }
+        .keyword { color: #ea580c; font-weight: 900; }
+        .grammar-box { background: #fff7ed; border-left: 6px solid #ea580c; padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 1.2rem; font-size: 2.0rem; line-height: 1.8; }
+        .try-q { font-size: 2.4rem; line-height: 1.6; margin-bottom: 0.3rem; font-weight: bold; }
+        .try-ja { font-size: 1.7rem; color: #6b7280; margin-bottom: 1.2rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 12px 20px; background: #fef3c7; border-radius: 12px; margin-bottom: 1.5rem; }
+        .word-bank span { font-size: 2.0rem; font-weight: bold; color: #92400e; }
+        .focus-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+        .focus-table th { background: #fff7ed; color: #ea580c; font-size: 1.1rem; padding: 8px 12px; text-align: left; border: 1px solid #fed7aa; }
+        .focus-table td { padding: 10px 12px; border: 1px solid #fed7aa; font-size: 1.25rem; vertical-align: top; }
+        .focus-table .label-cell { font-size: 1.05rem; color: #9a3412; font-weight: bold; background: #fff7ed; width: 200px; }
+        .focus-table .ja-cell { font-size: 1.05rem; color: #6b7280; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-stage text-white justify-center text-center">
+        <h1 class="text-7xl font-black mb-8 leading-tight">Lesson 9: Street Performers</h1>
+        <p class="text-4xl opacity-90">Focus & Try</p>
+    </div>
+
+    <!-- Slide 2: Focus 1 - 分詞の形容詞的用法 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 1</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「〜している…」「〜された…」　分詞の形容詞的用法</p>
+
+            <p class="example-sentence">We often see people <span class="keyword">called</span> "street performers."</p>
+            <p class="example-ja">私たちはしばしば、「ストリートパフォーマー」と呼ばれる人々を見ます。</p>
+
+            <p class="example-sentence">They play music for people <span class="keyword">using</span> the subways.</p>
+            <p class="example-ja">彼らは地下鉄を利用する人々に向けて音楽を演奏します。</p>
+
+            <div class="grammar-box">
+                分詞は、<strong>1語</strong>なら名詞の<strong>前</strong>から、<strong>2語以上</strong>のまとまりなら名詞の<strong>うしろ</strong>から修飾します。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <td class="label-cell">現在分詞<br><span style="font-size:0.9rem;font-weight:normal;">（〜している…）</span></td>
+                    <td>
+                        <p class="font-bold">Look at the cat <span class="keyword">sleeping</span> over there.</p>
+                        <p class="ja-cell">あちらで寝ているネコを見てください。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">過去分詞<br><span style="font-size:0.9rem;font-weight:normal;">（〜された…）</span></td>
+                    <td>
+                        <p class="font-bold">I want to eat chicken <span class="keyword">fried</span> by her.</p>
+                        <p class="ja-cell">私は彼女によって揚げられたチキンが食べたいです。</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus 2 - 分詞構文 -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 2</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「〜するときに」「〜なので」　分詞構文</p>
+
+            <p class="example-sentence"><span class="keyword">Performing</span> on the street, they didn't always have an audience.</p>
+            <p class="example-ja">路上でパフォーマンスをしていたときに、彼らにいつも観客がいたわけではありませんでした。</p>
+
+            <div class="grammar-box">
+                現在分詞や過去分詞で始まる句が、文全体に<strong>情報を付け加える</strong>働きをするものを「分詞構文」と言います。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <th>意味</th>
+                    <th>例文</th>
+                </tr>
+                <tr>
+                    <td class="label-cell">［時］<br>〜するときに</td>
+                    <td>
+                        <p class="font-bold"><span class="keyword">Cleaning</span> the classroom, I found a smartphone.</p>
+                        <p class="ja-cell">教室を掃除しているときに、私はスマートフォンを見つけました。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">［理由］<br>〜なので</td>
+                    <td>
+                        <p class="font-bold"><span class="keyword">Studying</span> hard, he can write an email in English.</p>
+                        <p class="ja-cell">熱心に勉強しているので、彼は英語でメールを書くことができます。</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 4: TRY 1 - 現在分詞/過去分詞 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語を現在分詞または過去分詞に変えましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① ( Look → <span class="hidden-answer" onclick="this.classList.toggle('show')">Looking</span> ) up at the night sky, I saw many stars.</p>
+                <p class="try-ja">夜空を見上げると、多くの星が見えました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② I found a star ( call → <span class="hidden-answer" onclick="this.classList.toggle('show')">called</span> ) Polaris.</p>
+                <p class="try-ja">北極星と呼ばれる星を見つけました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ There were some stars ( shine → <span class="hidden-answer" onclick="this.classList.toggle('show')">shining</span> ) brightly.</p>
+                <p class="try-ja">きらきらと明るく輝いている星がいくつかありました。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: TRY 2 - 語句選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>auditions</span><span>/</span><span>realize</span><span>/</span><span>amuse</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① My dream is to be a comedian and ( <span class="hidden-answer" onclick="this.classList.toggle('show')">amuse</span> ) people.</p>
+                <p class="try-ja">私の夢はコメディアンになって、人々を楽しませることです。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② I must pass some ( <span class="hidden-answer" onclick="this.classList.toggle('show')">auditions</span> ) to be a comedian.</p>
+                <p class="try-ja">コメディアンになるためにはいくつかのオーディションに合格しなくてはなりません。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ I will ( <span class="hidden-answer" onclick="this.classList.toggle('show')">realize</span> ) my dream in the future.</p>
+                <p class="try-ja">将来、私は自分の夢を実現させます。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: TRY 3 - 語句並べかえ -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語句を並べかえましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① That famous musician ( hard / experienced / times ) when she was young.</p>
+                <p class="try-q" style="margin-top:8px;">→ That famous musician <span class="hidden-answer" onclick="this.classList.toggle('show')">experienced hard times</span> when she was young.</p>
+                <p class="try-ja">あの有名なミュージシャンは、若い頃苦しい経験をしました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② She didn't ( on / give up / her ) dream.</p>
+                <p class="try-q" style="margin-top:8px;">→ She didn't <span class="hidden-answer" onclick="this.classList.toggle('show')">give up on her</span> dream.</p>
+                <p class="try-ja">彼女は自分の夢をあきらめませんでした。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ Her experience may ( be / for / true ) us.</p>
+                <p class="try-q" style="margin-top:8px;">→ Her experience may <span class="hidden-answer" onclick="this.classList.toggle('show')">be true for</span> us.</p>
+                <p class="try-ja">彼女の経験は私たちにも当てはまるかもしれません。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
