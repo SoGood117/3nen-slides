@@ -13,7 +13,7 @@
             display: none;
             height: 100vh;
             width: 100vw;
-            padding: 20px 16px 80px;
+            padding: 4vh 2.5vw 84px;
             flex-direction: column;
             align-items: center;
         }
@@ -23,7 +23,7 @@
                 #7c3aed 0%, #db2777 50%, #f59e0b 100%);
         }
 
-        .text-reading { font-size: clamp(2.0rem, 4vh, 3.4rem); line-height: 1.8; text-align: center; }
+        .text-reading { font-size: clamp(1.5rem, 3.1vh, 2.7rem); line-height: 1.5; text-align: center; }
         /* 本文を教科書のように「1行 約8語」の幅にそろえ、左右の余白を均等にする */
         #reading-content-static p,
         #reading-content-tts p,
@@ -32,6 +32,7 @@
             margin-left: auto;
             margin-right: auto;
             text-align: left;
+            margin-bottom: 0.55em;
         }
         /* Checkの英文も1行 約8語で折り返し・左右余白を均等に */
         #check-content p {
@@ -114,7 +115,7 @@
             max-width: 100%;
             overflow-y: auto;
             border-radius: 1.5rem;
-            padding: 2.5rem;
+            padding: 1.5rem 2rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             background-color: white;
         }
@@ -528,10 +529,10 @@
         function createWordCard(word, containerId) {
             const container = document.getElementById(containerId);
             const div = document.createElement('div');
-            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[200px]";
+            div.className = "bg-gray-700/50 p-5 rounded-2xl border-2 border-gray-600 text-center cursor-pointer hover:bg-gray-600 transition shadow-lg flex flex-col items-center justify-center h-[150px]";
             div.onclick = function() { this.querySelector('.ja-text').classList.toggle('opacity-0'); };
             div.innerHTML = `
-                <p class="text-3xl font-bold mb-4">${word.en}</p>
+                <p class="text-3xl font-bold mb-2">${word.en}</p>
                 <p class="ja-text text-3xl text-yellow-400 opacity-0 transition-opacity font-bold">${word.ja}</p>
             `;
             container.appendChild(div);
@@ -766,6 +767,58 @@
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
+
+        // --- 自動フィット: 枠からあふれる時だけ、そのスライドを収まる倍率に縮める ---
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                // グリッドかどうかは「クラス名」で判定（描画タイミングに依存させない）
+                const isGrid = box.classList.contains('grid');
+                let wrap = box.querySelector(':scope > .fit-wrap');
+                if(!wrap){
+                    // 枠の中身を1枚の入れ物にまとめ、それだけを縮める（枠のサイズは固定）
+                    wrap = document.createElement('div');
+                    wrap.className = 'fit-wrap';
+                    wrap.style.width = '100%';
+                    wrap.style.transformOrigin = 'top center';
+                    if(isGrid){
+                        // グリッドの列数・間隔を確実に入れ物側へ再現し、枠は通常ブロックに
+                        let cols = 1, gap = '1.25rem';
+                        box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                        box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                        wrap.style.display = 'grid';
+                        wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                        wrap.style.gap = gap;
+                        [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                        box.style.display = 'block';
+                    } else {
+                        // 子要素どうしの間隔クラスだけ入れ物へ移す（枠のflex中央寄せは残す）
+                        [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                    }
+                    while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                    box.appendChild(wrap);
+                }
+                wrap.style.transform = 'none';
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0;
+                const pb = parseFloat(cs.paddingBottom) || 0;
+                const avail = box.clientHeight - pt - pb;
+                const need = wrap.scrollHeight;
+                if(need > avail - 1 && need > 0){
+                    if(!isGrid){ box.style.justifyContent = 'flex-start'; }
+                    wrap.style.transform = 'scale(' + (avail / need) + ')';
+                } else {
+                    if(!isGrid){ box.style.justifyContent = ''; }
+                }
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
 
         window.onload = initApp;
     </script>

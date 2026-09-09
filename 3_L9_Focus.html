@@ -8,21 +8,21 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
         body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
-        .slide { display: none; height: 100vh; width: 100vw; padding: 20px 16px 80px; flex-direction: column; align-items: center; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 4vh 2.5vw 84px; flex-direction: column; align-items: center; }
         .slide.active { display: flex; }
         .bg-stage { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f59e0b 100%); }
         .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
-        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 1.5rem 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
         .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #ea580c !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 120px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
         .hidden-answer.show { color: #ea580c !important; font-weight: bold; }
-        .example-sentence { font-size: 2.4rem; line-height: 1.6; margin-bottom: 0.5rem; font-weight: bold; color: #1f2937; }
-        .example-ja { font-size: 1.7rem; color: #6b7280; margin-bottom: 1.2rem; }
+        .example-sentence { font-size: clamp(1.4rem, 2.9vh, 2.2rem); line-height: 1.4; margin-bottom: 0.4rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: clamp(1.05rem, 2.1vh, 1.6rem); color: #6b7280; margin-bottom: 0.7rem; }
         .keyword { color: #ea580c; font-weight: 900; }
-        .grammar-box { background: #fff7ed; border-left: 6px solid #ea580c; padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 1.2rem; font-size: 2.0rem; line-height: 1.8; }
-        .try-q { font-size: 2.4rem; line-height: 1.6; margin-bottom: 0.3rem; font-weight: bold; }
-        .try-ja { font-size: 1.7rem; color: #6b7280; margin-bottom: 1.2rem; }
-        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 12px 20px; background: #fef3c7; border-radius: 12px; margin-bottom: 1.5rem; }
-        .word-bank span { font-size: 2.0rem; font-weight: bold; color: #92400e; }
+        .grammar-box { background: #fff7ed; border-left: 6px solid #ea580c; padding: 0.9rem 1.3rem; border-radius: 0 12px 12px 0; margin-bottom: 0.8rem; font-size: clamp(1.2rem, 2.5vh, 1.9rem); line-height: 1.5; }
+        .try-q { font-size: clamp(1.4rem, 2.9vh, 2.2rem); line-height: 1.4; margin-bottom: 0.3rem; font-weight: bold; }
+        .try-ja { font-size: clamp(1.05rem, 2.1vh, 1.6rem); color: #6b7280; margin-bottom: 0.7rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 10px 18px; background: #fef3c7; border-radius: 12px; margin-bottom: 1rem; }
+        .word-bank span { font-size: clamp(1.3rem, 2.4vh, 1.9rem); font-weight: bold; color: #92400e; }
         .focus-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
         .focus-table th { background: #fff7ed; color: #ea580c; font-size: 1.1rem; padding: 8px 12px; text-align: left; border: 1px solid #fed7aa; }
         .focus-table td { padding: 10px 12px; border: 1px solid #fed7aa; font-size: 1.25rem; vertical-align: top; }
@@ -193,6 +193,60 @@
         }
         function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
         function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+
+        // --- 自動フィット: 枠からあふれる時だけ、そのスライドを収まる倍率に縮める ---
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                // グリッドかどうかは「クラス名」で判定（描画タイミングに依存させない）
+                const isGrid = box.classList.contains('grid');
+                let wrap = box.querySelector(':scope > .fit-wrap');
+                if(!wrap){
+                    // 枠の中身を1枚の入れ物にまとめ、それだけを縮める（枠のサイズは固定）
+                    wrap = document.createElement('div');
+                    wrap.className = 'fit-wrap';
+                    wrap.style.width = '100%';
+                    wrap.style.transformOrigin = 'top center';
+                    if(isGrid){
+                        // グリッドの列数・間隔を確実に入れ物側へ再現し、枠は通常ブロックに
+                        let cols = 1, gap = '1.25rem';
+                        box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                        box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                        wrap.style.display = 'grid';
+                        wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                        wrap.style.gap = gap;
+                        [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                        box.style.display = 'block';
+                    } else {
+                        // 子要素どうしの間隔クラスだけ入れ物へ移す（枠のflex中央寄せは残す）
+                        [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                    }
+                    while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                    box.appendChild(wrap);
+                }
+                wrap.style.transform = 'none';
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0;
+                const pb = parseFloat(cs.paddingBottom) || 0;
+                const avail = box.clientHeight - pt - pb;
+                const need = wrap.scrollHeight;
+                if(need > avail - 1 && need > 0){
+                    if(!isGrid){ box.style.justifyContent = 'flex-start'; }
+                    wrap.style.transform = 'scale(' + (avail / need) + ')';
+                } else {
+                    if(!isGrid){ box.style.justifyContent = ''; }
+                }
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('load', () => requestAnimationFrame(fitActiveSlide));
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
