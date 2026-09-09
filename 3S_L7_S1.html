@@ -22,6 +22,13 @@
 
         .text-reading { font-size: clamp(1.4rem, 3vh, 2.4rem); line-height: 1.8; text-align: center; }
         .text-check { font-size: clamp(1.5rem, 3.2vh, 2.6rem); line-height: 1.5; text-align: center; }
+        /* Checkの英文も1行 約8語で折り返し・左そろえ・左右余白均等 */
+        #check-content p {
+            max-width: 44ch;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
         .word-wrapper { display: inline-block; white-space: nowrap; }
         .slashable-char {
             display: inline-block;
