@@ -24,6 +24,15 @@
         }
 
         .text-reading { font-size: clamp(2.0rem, 4vh, 3.4rem); line-height: 1.8; text-align: center; }
+        /* 本文を教科書のように「1行 約8語」の幅にそろえ、左右の余白を均等にする */
+        #reading-content-static p,
+        #reading-content-tts p,
+        #reading-content-quiz p {
+            max-width: 44ch;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
         .text-check { font-size: clamp(1.5rem, 3.2vh, 2.6rem); line-height: 1.5; text-align: center; }
         .word-wrapper { display: inline-block; white-space: nowrap; }
         .slashable-char {
