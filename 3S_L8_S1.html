@@ -156,10 +156,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -179,16 +184,16 @@
                 "Like this, colors often {influence} our mind."
             ],
             translationPhrases: [
-                { en: "What is your favorite color?", ja: "あなたの好きな色は何ですか？" },
-                { en: "Everything around us has its own color.", ja: "私たちの周りのすべてのものは，それ自身の色を持っています。" },
-                { en: "The pictograms above are toilet signs.", ja: "上のピクトグラムはトイレのサインです。" },
-                { en: "What do you think?", ja: "どう思いますか？" },
-                { en: "In Japan, blue has been for the male sign", ja: "日本では，青は男性用サインに使われてきました" },
-                { en: "and red for the female sign", ja: "そして赤は女性用サインに" },
-                { en: "since the 1964 Tokyo Olympics.", ja: "1964年の東京オリンピック以来。" },
-                { en: "However, they are reversed above.", ja: "しかし，上ではそれらが逆になっています。" },
-                { en: "We might be confused when we see them.", ja: "私たちはそれらを見ると戸惑うかもしれません。" },
-                { en: "Like this, colors often influence our mind.", ja: "このように，色はよく私たちの心に影響を与えます。" }
+                { chunks: [{ en: "What is", ja: "何ですか" }, { en: "your favorite color?", ja: "あなたの好きな色は" }] },
+                { chunks: [{ en: "Everything around us", ja: "私たちの周りのすべてが" }, { en: "has its own color.", ja: "それ自身の色を持つ" }] },
+                { chunks: [{ en: "The pictograms above", ja: "上のピクトグラムは" }, { en: "are toilet signs.", ja: "トイレのサインだ" }] },
+                { chunks: [{ en: "What do you think?", ja: "どう思いますか" }] },
+                { chunks: [{ en: "In Japan,", ja: "日本では，" }, { en: "blue has been", ja: "青は使われてきた" }, { en: "for the male sign", ja: "男性用サインに" }] },
+                { chunks: [{ en: "and red", ja: "そして赤は" }, { en: "for the female sign", ja: "女性用サインに" }] },
+                { chunks: [{ en: "since the 1964", ja: "1964年の" }, { en: "Tokyo Olympics.", ja: "東京オリンピック以来" }] },
+                { chunks: [{ en: "However,", ja: "しかし，" }, { en: "they are reversed", ja: "それらは逆になっている" }, { en: "above.", ja: "上では" }] },
+                { chunks: [{ en: "We might be confused", ja: "私たちは戸惑うかも" }, { en: "when we see them.", ja: "それらを見ると" }] },
+                { chunks: [{ en: "Like this,", ja: "このように，" }, { en: "colors often influence", ja: "色はよく影響する" }, { en: "our mind.", ja: "私たちの心に" }] },
             ],
             checks: [
                 { q: "1. The pictograms are the <span class='check-bracket'>(</span> {toilet} <span class='check-bracket'>)</span> signs with reversed colors." },
@@ -651,9 +656,8 @@
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div');
                 card.className = "phrase-card";
-                card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 

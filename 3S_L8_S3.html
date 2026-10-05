@@ -77,10 +77,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -100,14 +105,14 @@
                 "Since early times, colors have been playing an important role in our lives. Colors are still full of mysteries."
             ],
             translationPhrases: [
-                { en: "Colors can affect our appetite.", ja: "色は私たちの食欲に影響を与えることができます。" },
-                { en: "It is said that warm colors such as red and orange", ja: "赤やオレンジのような暖色は" },
-                { en: "stimulate the appetite.", ja: "食欲を刺激すると言われています。" },
-                { en: "On the other hand, blue, a cool color, decreases it.", ja: "一方で，寒色である青は，食欲を減らします。" },
-                { en: "There are no natural foods that are blue.", ja: "青い自然の食べ物はありません。" },
-                { en: "Does your appetite increase when you see the blue-colored foods?", ja: "青色の食べ物を見ると食欲が増しますか？" },
-                { en: "Since early times, colors have been playing an important role in our lives.", ja: "遠い昔からずっと，色は私たちの生活の中で重要な役割を果たしてきています。" },
-                { en: "Colors are still full of mysteries.", ja: "色はまだ謎に満ちています。" }
+                { chunks: [{ en: "Colors can affect", ja: "色は影響できる" }, { en: "our appetite.", ja: "私たちの食欲に" }] },
+                { chunks: [{ en: "It is said that", ja: "言われている" }, { en: "warm colors", ja: "暖色は" }, { en: "such as red and orange", ja: "赤やオレンジのような" }] },
+                { chunks: [{ en: "stimulate the appetite.", ja: "食欲を刺激すると" }] },
+                { chunks: [{ en: "On the other hand,", ja: "一方で，" }, { en: "blue, a cool color,", ja: "寒色である青は" }, { en: "decreases it.", ja: "それを減らす" }] },
+                { chunks: [{ en: "There are no", ja: "ない" }, { en: "natural foods", ja: "自然の食べ物は" }, { en: "that are blue.", ja: "青い" }] },
+                { chunks: [{ en: "Does your appetite increase", ja: "食欲は増しますか" }, { en: "when you see", ja: "見ると" }, { en: "the blue-colored foods?", ja: "青色の食べ物を" }] },
+                { chunks: [{ en: "Since early times,", ja: "遠い昔から，" }, { en: "colors have been playing", ja: "色は果たしてきた" }, { en: "an important role", ja: "重要な役割を" }, { en: "in our lives.", ja: "私たちの生活で" }] },
+                { chunks: [{ en: "Colors are still", ja: "色はまだ" }, { en: "full of mysteries.", ja: "謎に満ちている" }] },
             ],
             checks: [
                 { q: "1. How do warm colors affect our appetite?", sub: "— They <span class='check-bracket'>(</span> {stimulate} <span class='check-bracket'>)</span> our appetite." },
@@ -495,9 +500,9 @@
             transContent.innerHTML = '';
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div');
-                card.className = "phrase-card"; card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.className = "phrase-card";
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 

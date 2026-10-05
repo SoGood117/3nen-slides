@@ -165,10 +165,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -188,15 +193,15 @@
                 "Some of these \"subway musicians\" became famous later, and they said, \"The subway was our life-changing concert hall to {realize} our dreams!\""
             ],
             translationPhrases: [
-                { en: "Traveling in Paris,", ja: "パリを旅行していると，" },
-                { en: "we often see people playing the acoustic guitar and the bass", ja: "アコースティックギターやベースを演奏する人々をよく見かけます" },
-                { en: "in the subway cars or the passageways.", ja: "地下鉄の車内や通路で。" },
-                { en: "They play music for people using the subways.", ja: "彼らは地下鉄を利用する人々に向けて音楽を演奏します。" },
-                { en: "They must pass a competitive audition to play there.", ja: "そこで演奏するには，競争の激しいオーディションに合格しなければなりません。" },
-                { en: "They are supported by the local government.", ja: "彼らは地元の自治体に支援されています。" },
-                { en: "Some of these \"subway musicians\" became famous later,", ja: "これらの「地下鉄ミュージシャン」の中には，後に有名になった人もいて，" },
-                { en: "and they said, \"The subway was our life-changing concert hall", ja: "彼らは言いました，「地下鉄は私たちの人生を変えるコンサートホールでした" },
-                { en: "to realize our dreams!\"", ja: "夢を実現するための！」" }
+                { chunks: [{ en: "Traveling", ja: "旅行していると" }, { en: "in Paris,", ja: "パリを" }] },
+                { chunks: [{ en: "we often see", ja: "私たちはよく見かける" }, { en: "people playing", ja: "演奏する人々を" }, { en: "the acoustic guitar", ja: "アコースティックギター" }, { en: "and the bass", ja: "とベースを" }] },
+                { chunks: [{ en: "in the subway cars", ja: "地下鉄の車内" }, { en: "or the passageways.", ja: "や通路で" }] },
+                { chunks: [{ en: "They play music", ja: "彼らは音楽を演奏する" }, { en: "for people", ja: "人々のために" }, { en: "using the subways.", ja: "地下鉄を利用する" }] },
+                { chunks: [{ en: "They must pass", ja: "彼らは通らねばならない" }, { en: "a competitive audition", ja: "競争の激しいオーディションを" }, { en: "to play there.", ja: "そこで演奏するには" }] },
+                { chunks: [{ en: "They are supported", ja: "彼らは支援されている" }, { en: "by the local government.", ja: "地元の自治体に" }] },
+                { chunks: [{ en: "Some of these", ja: "これらの中には" }, { en: "\"subway musicians\"", ja: "「地下鉄ミュージシャン」の" }, { en: "became famous later,", ja: "後に有名になった人もいて，" }] },
+                { chunks: [{ en: "and they said,", ja: "彼らは言った，" }, { en: "\"The subway was", ja: "「地下鉄は" }, { en: "our life-changing", ja: "人生を変える" }, { en: "concert hall", ja: "コンサートホールだった" }] },
+                { chunks: [{ en: "to realize", ja: "実現するための" }, { en: "our dreams!\"", ja: "私たちの夢を」" }] },
             ],
             checks: [
                 { q: "1. People often play music in the <span class='check-bracket'>(</span> {subway} <span class='check-bracket'>)</span> cars or the passageways in Paris." },
@@ -657,9 +662,8 @@
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div');
                 card.className = "phrase-card";
-                card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 

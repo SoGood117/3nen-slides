@@ -165,10 +165,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -188,16 +193,16 @@
                 "This is my {happiness}. Every street performer {amuses} people, while {pursuing} his or her dream.\""
             ],
             translationPhrases: [
-                { en: "We often see people called \"street performers.\"", ja: "私たちはよく「ストリートパフォーマー」と呼ばれる人々を見かけます。" },
-                { en: "They play music, draw pictures, juggle,", ja: "彼らは音楽を演奏し，絵を描き，ジャグリングをし，" },
-                { en: "or act out a pantomime on the street.", ja: "あるいは路上でパントマイムを演じます。" },
-                { en: "We laugh at their performances,", ja: "私たちは彼らのパフォーマンスを見て笑い，" },
-                { en: "and we are moved by them.", ja: "そして彼らに感動させられます。" },
-                { en: "A juggler says, \"Sometimes I don't want to juggle,", ja: "あるジャグラーは言います，「ときどきジャグリングをしたくないこともあります，" },
-                { en: "but I can't stop juggling when I see people smiling.", ja: "でも人々が笑っているのを見ると，ジャグリングをやめられません。" },
-                { en: "This is my happiness.", ja: "これが私の幸せです。" },
-                { en: "Every street performer amuses people,", ja: "どのストリートパフォーマーも人々を楽しませています，" },
-                { en: "while pursuing his or her dream.\"", ja: "自分の夢を追い求めながら。」" }
+                { chunks: [{ en: "We often see", ja: "私たちはよく見かける" }, { en: "people called", ja: "〜と呼ばれる人々を" }, { en: "\"street performers.\"", ja: "「ストリートパフォーマー」" }] },
+                { chunks: [{ en: "They play music,", ja: "彼らは音楽を演奏し，" }, { en: "draw pictures,", ja: "絵を描き，" }, { en: "juggle,", ja: "ジャグリングをし，" }] },
+                { chunks: [{ en: "or act out", ja: "あるいは演じる" }, { en: "a pantomime", ja: "パントマイムを" }, { en: "on the street.", ja: "路上で" }] },
+                { chunks: [{ en: "We laugh at", ja: "私たちは笑う" }, { en: "their performances,", ja: "彼らのパフォーマンスに" }] },
+                { chunks: [{ en: "and we are moved", ja: "そして感動させられる" }, { en: "by them.", ja: "彼らに" }] },
+                { chunks: [{ en: "A juggler says,", ja: "あるジャグラーは言う，" }, { en: "\"Sometimes I don't want", ja: "「時々したくない" }, { en: "to juggle,", ja: "ジャグリングを，" }] },
+                { chunks: [{ en: "but I can't stop", ja: "でもやめられない" }, { en: "juggling", ja: "ジャグリングを" }, { en: "when I see", ja: "見ると" }, { en: "people smiling.", ja: "笑っている人々を" }] },
+                { chunks: [{ en: "This is", ja: "これが" }, { en: "my happiness.", ja: "私の幸せ" }] },
+                { chunks: [{ en: "Every street performer", ja: "どのパフォーマーも" }, { en: "amuses people,", ja: "人々を楽しませる，" }] },
+                { chunks: [{ en: "while pursuing", ja: "追い求めながら" }, { en: "his or her dream.\"", ja: "自分の夢を」" }] },
             ],
             checks: [
                 { q: "1. Who are the people playing music, drawing pictures, juggling, or acting out a pantomime on the street?", sub: "— They are street <span class='check-bracket'>(</span> {performers} <span class='check-bracket'>)</span>." },
@@ -654,9 +659,8 @@
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div');
                 card.className = "phrase-card";
-                card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 

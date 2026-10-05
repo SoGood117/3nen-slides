@@ -61,10 +61,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -84,15 +89,15 @@
                 "How will you {get along with} it in the future?"
             ],
             translationPhrases: [
-                { en: "In the future, AI robots will not only understand human emotions,", ja: "将来，AIロボットは人間の感情を理解するだけでなく，" },
-                { en: "but also have their own emotions.", ja: "自分自身の感情も持つようになるでしょう。" },
-                { en: "Some scientists believe that", ja: "一部の科学者はのように信じています" },
-                { en: "humans will begin to marry AI robots before 2050.", ja: "2050年までに人間がAIロボットと結婚し始めると。" },
-                { en: "Would you like to marry an ideal man or woman", ja: "理想の男性や女性と結婚したいですか" },
-                { en: "by using AI technology?", ja: "AI技術を使って？" },
-                { en: "The relationship between humans and AI", ja: "人間とAIの関係は" },
-                { en: "is getting close physically and mentally.", ja: "肉体的にも精神的にも近くなっています。" },
-                { en: "How will you get along with it in the future?", ja: "将来，あなたはどのようにAIとうまくやっていくでしょうか？" }
+                { chunks: [{ en: "In the future,", ja: "将来，" }, { en: "AI robots will", ja: "AIロボットは" }, { en: "not only understand", ja: "理解するだけでなく" }, { en: "human emotions,", ja: "人間の感情を" }] },
+                { chunks: [{ en: "but also have", ja: "持つようにもなる" }, { en: "their own emotions.", ja: "自分自身の感情を" }] },
+                { chunks: [{ en: "Some scientists", ja: "一部の科学者は" }, { en: "believe that", ja: "こう信じている" }] },
+                { chunks: [{ en: "humans will begin", ja: "人間は始めるだろう" }, { en: "to marry AI robots", ja: "AIロボットと結婚し" }, { en: "before 2050.", ja: "2050年までに" }] },
+                { chunks: [{ en: "Would you like", ja: "あなたはしたいですか" }, { en: "to marry", ja: "結婚" }, { en: "an ideal man or woman", ja: "理想の男性や女性と" }] },
+                { chunks: [{ en: "by using", ja: "使って" }, { en: "AI technology?", ja: "AI技術を" }] },
+                { chunks: [{ en: "The relationship", ja: "関係は" }, { en: "between humans and AI", ja: "人間とAIの" }] },
+                { chunks: [{ en: "is getting close", ja: "近くなっている" }, { en: "physically and mentally.", ja: "肉体的にも精神的にも" }] },
+                { chunks: [{ en: "How will you", ja: "あなたはどのように" }, { en: "get along with it", ja: "それとうまくやるか" }, { en: "in the future?", ja: "将来" }] },
             ],
             checks: [
                 { q: "1. In the future, will AI robots have their own emotions?", sub: "— <span class='check-bracket'>(</span> {Yes} <span class='check-bracket'>)</span> , they <span class='check-bracket'>(</span> {will} <span class='check-bracket'>)</span> ." },
@@ -242,9 +247,10 @@
                 A: Can we make friends <span class="text-red-600 underline decoration-4">with AI robots</span>?
             </div>
             <div class="bg-green-100/50 p-6 rounded-2xl border-l-8 border-slate-400 text-4xl font-bold">
-                B: Yes, we can. <span id="target-word" class="text-slate-700">Trusting</span> is important.
+                B: Yes, we can. <span id="target-word" class="comm-hide">Trusting</span> is important.
             </div>
             <div id="dialogue-options" class="mt-6 grid grid-cols-3 gap-4"></div>
+            <div style="text-align:center;margin-top:4px;"><button onclick="revealDialogue()" id="dialogue-btn" style="background:#22c55e;color:white;border:none;border-radius:10px;padding:8px 24px;font-size:1rem;font-weight:bold;cursor:pointer;">答えを見る</button></div>
         </div>
     </div>
 
@@ -399,9 +405,9 @@
 
             const tc = document.getElementById('translation-content'); tc.innerHTML = '';
             SLIDE_DATA.translationPhrases.forEach(phrase => {
-                const card = document.createElement('div'); card.className = "phrase-card"; card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                const card = document.createElement('div'); card.className = "phrase-card";
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 tc.appendChild(card);
             });
 
@@ -412,7 +418,7 @@
             SLIDE_DATA.dialogue.options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = "bg-white border-2 border-green-200 p-4 rounded-xl font-bold hover:bg-green-500 hover:text-white transition text-xl shadow-sm";
-                btn.innerText = opt; btn.onclick = () => document.getElementById('target-word').innerText = opt;
+                btn.innerText = opt; btn.onclick = () => { const _t=document.getElementById('target-word'); _t.innerText = opt; _t.classList.add('reveal'); };
                 optDiv.appendChild(btn);
             });
 
@@ -435,6 +441,15 @@
         function prevSlide() { if(currentSlide > 0){currentSlide--;updateSlideDisplay();} }
         document.addEventListener('keydown', e => { if(e.key==='ArrowRight') nextSlide(); if(e.key==='ArrowLeft') prevSlide(); });
         window.onload = initApp;
+    
+        function revealDialogue(){
+            const t=document.getElementById('target-word');
+            const r=!t.classList.contains('reveal');
+            t.classList.toggle('reveal', r);
+            const b=document.getElementById('dialogue-btn');
+            if(b){ b.textContent = r ? '答えを隠す' : '答えを見る'; b.style.background = r ? '#ef4444' : '#22c55e'; }
+        }
+
     </script>
 </body>
 </html>

@@ -90,10 +90,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -113,14 +118,14 @@
                 "Now, AI is becoming a {reliable} {butler} for us."
             ],
             translationPhrases: [
-                { en: "Many appliances with AI", ja: "AIを搭載した多くの家電製品が" },
-                { en: "have made household chores much easier.", ja: "家事をずっと簡単にしてくれました。" },
-                { en: "For example, if we cannot decide the dinner menu,", ja: "例えば，もし夕食の献立を決められなければ，" },
-                { en: "the fridge offers a suggestion.", ja: "冷蔵庫が提案してくれます。" },
-                { en: "It can suggest the best dish according to the foodstuff in it.", ja: "それは中の食材に応じて最適な料理を提案できます。" },
-                { en: "Once we have decided the menu,", ja: "いったん献立を決めたら，" },
-                { en: "a microwave will cook it to suit our taste.", ja: "電子レンジが好みに合わせて調理してくれます。" },
-                { en: "Now, AI is becoming a reliable butler for us.", ja: "今や，AIは私たちの頼もしい執事になりつつあります。" }
+                { chunks: [{ en: "Many appliances", ja: "多くの家電製品" }, { en: "with AI", ja: "AIを搭載した" }] },
+                { chunks: [{ en: "have made", ja: "してくれた" }, { en: "household chores", ja: "家事を" }, { en: "much easier.", ja: "ずっと簡単に" }] },
+                { chunks: [{ en: "For example,", ja: "例えば，" }, { en: "if we cannot decide", ja: "もし決められなければ" }, { en: "the dinner menu,", ja: "夕食の献立を" }] },
+                { chunks: [{ en: "the fridge", ja: "冷蔵庫が" }, { en: "offers a suggestion.", ja: "提案してくれる" }] },
+                { chunks: [{ en: "It can suggest", ja: "それは提案できる" }, { en: "the best dish", ja: "最適な料理を" }, { en: "according to the foodstuff", ja: "食材に応じて" }, { en: "in it.", ja: "中の" }] },
+                { chunks: [{ en: "Once we have decided", ja: "いったん決めたら" }, { en: "the menu,", ja: "献立を" }] },
+                { chunks: [{ en: "a microwave", ja: "電子レンジが" }, { en: "will cook it", ja: "それを調理する" }, { en: "to suit our taste.", ja: "好みに合わせて" }] },
+                { chunks: [{ en: "Now,", ja: "今や，" }, { en: "AI is becoming", ja: "AIはなりつつある" }, { en: "a reliable butler", ja: "頼もしい執事に" }, { en: "for us.", ja: "私たちの" }] },
             ],
             checks: [
                 { q: "1. What made our household chores much easier?", sub: "— Many <span class='check-bracket'>(</span> {appliances} <span class='check-bracket'>)</span> with AI did." },
@@ -272,9 +277,10 @@
                 A: What does the AI fridge do <span class="text-red-600 underline decoration-4">when you can't decide the menu</span>?
             </div>
             <div class="bg-green-100/50 p-6 rounded-2xl border-l-8 border-slate-400 text-4xl font-bold">
-                B: It can <span id="target-word" class="text-slate-700">offer a suggestion</span>.
+                B: It can <span id="target-word" class="comm-hide">offer a suggestion</span>.
             </div>
             <div id="dialogue-options" class="mt-6 grid grid-cols-3 gap-4"></div>
+            <div style="text-align:center;margin-top:4px;"><button onclick="revealDialogue()" id="dialogue-btn" style="background:#22c55e;color:white;border:none;border-radius:10px;padding:8px 24px;font-size:1rem;font-weight:bold;cursor:pointer;">答えを見る</button></div>
         </div>
     </div>
 
@@ -458,9 +464,8 @@
             transContent.innerHTML = '';
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div'); card.className = "phrase-card";
-                card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 
@@ -473,7 +478,7 @@
                 const btn = document.createElement('button');
                 btn.className = "bg-white border-2 border-green-200 p-4 rounded-xl font-bold hover:bg-green-500 hover:text-white transition text-xl shadow-sm";
                 btn.innerText = opt;
-                btn.onclick = () => document.getElementById('target-word').innerText = opt;
+                btn.onclick = () => { const _t=document.getElementById('target-word'); _t.innerText = opt; _t.classList.add('reveal'); };
                 optDiv.appendChild(btn);
             });
 
@@ -496,6 +501,15 @@
         function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
         document.addEventListener('keydown', e => { if(e.key==='ArrowRight') nextSlide(); if(e.key==='ArrowLeft') prevSlide(); });
         window.onload = initApp;
+    
+        function revealDialogue(){
+            const t=document.getElementById('target-word');
+            const r=!t.classList.contains('reveal');
+            t.classList.toggle('reveal', r);
+            const b=document.getElementById('dialogue-btn');
+            if(b){ b.textContent = r ? '答えを隠す' : '答えを見る'; b.style.background = r ? '#ef4444' : '#22c55e'; }
+        }
+
     </script>
 </body>
 </html>

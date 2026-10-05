@@ -127,10 +127,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -150,14 +155,14 @@
                 "According to an American study, 'Cool Down Pink' is said to make {prisoners} less {aggressive}."
             ],
             translationPhrases: [
-                { en: "Have you ever noticed", ja: "気づいたことはありますか" },
-                { en: "that fast-food restaurants use 'red' inside them?", ja: "ファストフードのレストランが店内に「赤」を使っているということに。" },
-                { en: "People are less relaxed in warm colors like red.", ja: "人々は赤のような暖色ではあまりリラックスできません。" },
-                { en: "They are more likely to buy food and leave.", ja: "彼らは食べ物を買って立ち去る可能性がより高くなります。" },
-                { en: "Pink is a warm color and it supposedly makes us calm.", ja: "ピンクは暖色で，おそらく私たちを落ち着かせます。" },
-                { en: "Surprisingly, there is a jail room in pink in Texas, the U.S.", ja: "驚くことに，アメリカのテキサスに，ピンク色の刑務所の部屋があります。" },
-                { en: "According to an American study,", ja: "アメリカの研究によると，" },
-                { en: "'Cool Down Pink' is said to make prisoners less aggressive.", ja: "「クールダウンピンク」は囚人の攻撃性を低下させると言われています。" }
+                { chunks: [{ en: "Have you ever noticed", ja: "気づいたことはありますか" }] },
+                { chunks: [{ en: "that fast-food restaurants", ja: "ファストフード店が" }, { en: "use \"red\"", ja: "「赤」を使う" }, { en: "inside them?", ja: "店内に" }] },
+                { chunks: [{ en: "People are less relaxed", ja: "人はあまりくつろげない" }, { en: "in warm colors", ja: "暖色では" }, { en: "like red.", ja: "赤のような" }] },
+                { chunks: [{ en: "They are more likely", ja: "彼らは可能性が高い" }, { en: "to buy food", ja: "食べ物を買って" }, { en: "and leave.", ja: "立ち去る" }] },
+                { chunks: [{ en: "Pink is a warm color", ja: "ピンクは暖色で" }, { en: "and it supposedly", ja: "そしておそらく" }, { en: "makes us calm.", ja: "私たちを落ち着かせる" }] },
+                { chunks: [{ en: "Surprisingly,", ja: "驚くことに，" }, { en: "there is a jail room", ja: "刑務所の部屋がある" }, { en: "in pink", ja: "ピンク色の" }, { en: "in Texas, the U.S.", ja: "アメリカのテキサスに" }] },
+                { chunks: [{ en: "According to", ja: "によると" }, { en: "an American study,", ja: "アメリカの研究" }] },
+                { chunks: [{ en: "\"Cool Down Pink\"", ja: "「クールダウンピンク」は" }, { en: "is said to make", ja: "すると言われる" }, { en: "prisoners less aggressive.", ja: "囚人の攻撃性を低く" }] },
             ],
             checks: [
                 { q: "1. People are more <span class='check-bracket'>(</span> {likely} <span class='check-bracket'>)</span> to buy food in warm colors." },
@@ -606,9 +611,8 @@
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div');
                 card.className = "phrase-card";
-                card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 

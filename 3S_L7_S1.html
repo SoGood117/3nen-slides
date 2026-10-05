@@ -152,10 +152,15 @@
 <body>
 <style>
 /* --- standard-format upgrade --- */
-.phrase-card{border-left:6px solid #22c55e;}
-.phrase-card.active{background:#f0fdf4;}
-.comm-hide{background:#374151;color:transparent;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
-.comm-hide.reveal{background:transparent;color:#ef4444;}
+.phrase-card{margin-bottom:10px;}
+.ph-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:12px;row-gap:2px;margin:2px 0;padding:4px 10px;border-left:5px solid #22c55e;border-radius:8px;line-height:1.45;cursor:pointer;transition:background .15s;}
+.ph-line:hover{background:#f1f5f9;}
+.ph-line.show{background:#f0fdf4;}
+.ph-en{font-size:clamp(1.35rem,2.9vh,2.1rem);font-weight:800;color:#1f2937;letter-spacing:.2px;}
+.ph-ja{font-size:clamp(1.05rem,2.2vh,1.6rem);color:#15803d;font-weight:800;opacity:0;transition:opacity .2s;}
+.ph-line.show .ph-ja{opacity:1;}
+.comm-hide{background:#374151;color:transparent !important;border-radius:5px;padding:0 6px;cursor:pointer;transition:color .25s, background .25s;}
+.comm-hide.reveal{background:transparent;color:#ef4444 !important;}
 .kw-illust img{width:100%;height:auto;border-radius:10px;display:block;}
 </style>
 
@@ -174,13 +179,13 @@
                 "Like this, AI robots can do various {tasks} in our daily lives {instead of} humans."
             ],
             translationPhrases: [
-                { en: "When you go to the library,", ja: "図書館へ行くと，" },
-                { en: "you are greeted by a cute cat-shaped AI robot.", ja: "かわいい猫型のAIロボットにあいさつをされます。" },
-                { en: "This robot can help you search for books.", ja: "このロボットは本を探すのを手伝ってくれます。" },
-                { en: "It also says to you,", ja: "それはまた，あなたにこう言います，" },
-                { en: "'Your body temperature is 36.2 degrees Celsius.'", ja: "「あなたの体温は36.2度です。」" },
-                { en: "Like this, AI robots can do various tasks", ja: "このように，AIロボットはさまざまな作業ができます" },
-                { en: "in our daily lives instead of humans.", ja: "人間の代わりに，私たちの日常生活の中で。" }
+                { chunks: [{ en: "When you go", ja: "あなたが行くとき" }, { en: "to the library,", ja: "図書館へ，" }] },
+                { chunks: [{ en: "you are greeted", ja: "あなたはあいさつされる" }, { en: "by a cute", ja: "かわいい" }, { en: "cat-shaped AI robot.", ja: "猫型のAIロボットに" }] },
+                { chunks: [{ en: "This robot can help you", ja: "このロボットは手伝える" }, { en: "search for books.", ja: "本を探すのを" }] },
+                { chunks: [{ en: "It also says", ja: "それはまた言う" }, { en: "to you,", ja: "あなたに，" }] },
+                { chunks: [{ en: "\"Your body temperature", ja: "「あなたの体温は" }, { en: "is 36.2 degrees Celsius.\"", ja: "36.2度です」" }] },
+                { chunks: [{ en: "Like this,", ja: "このように，" }, { en: "AI robots can do", ja: "AIロボットはできる" }, { en: "various tasks", ja: "さまざまな作業を" }] },
+                { chunks: [{ en: "in our daily lives", ja: "私たちの日常生活で" }, { en: "instead of humans.", ja: "人間の代わりに" }] },
             ],
             checks: [
                 { q: "1. In the library, a cat-shaped AI robot greets us and <span class='check-bracket'>(</span> {helps} <span class='check-bracket'>)</span> us search for books." },
@@ -332,9 +337,10 @@
                 A: What <span class="text-red-600 underline decoration-4">can AI robots do</span>?
             </div>
             <div class="bg-green-100/50 p-6 rounded-2xl border-l-8 border-slate-400 text-4xl font-bold">
-                B: They can <span id="target-word" class="text-slate-700">help you search for books</span>.
+                B: They can <span id="target-word" class="comm-hide">help you search for books</span>.
             </div>
             <div id="dialogue-options" class="mt-6 grid grid-cols-3 gap-4"></div>
+            <div style="text-align:center;margin-top:4px;"><button onclick="revealDialogue()" id="dialogue-btn" style="background:#22c55e;color:white;border:none;border-radius:10px;padding:8px 24px;font-size:1rem;font-weight:bold;cursor:pointer;">答えを見る</button></div>
         </div>
     </div>
 
@@ -584,9 +590,8 @@
             SLIDE_DATA.translationPhrases.forEach(phrase => {
                 const card = document.createElement('div');
                 card.className = "phrase-card";
-                card.onclick = () => card.classList.toggle('active');
-                const _ch = phrase.chunks || [{en:phrase.en, ja:phrase.ja}];
-                card.innerHTML = _ch.map(c => `<div class="phrase-en">${c.en}</div><div class="phrase-ja">${c.ja}</div>`).join("");
+                card.innerHTML = phrase.chunks.map(c => `<div class="ph-line"><span class="ph-en">${c.en}</span><span class="ph-ja">${c.ja}</span></div>`).join("");
+                card.querySelectorAll('.ph-line').forEach(line => { line.onclick = () => line.classList.toggle('show'); });
                 transContent.appendChild(card);
             });
 
@@ -599,7 +604,7 @@
                 const btn = document.createElement('button');
                 btn.className = "bg-white border-2 border-green-200 p-4 rounded-xl font-bold hover:bg-green-500 hover:text-white transition text-xl shadow-sm";
                 btn.innerText = opt;
-                btn.onclick = () => document.getElementById('target-word').innerText = opt;
+                btn.onclick = () => { const _t=document.getElementById('target-word'); _t.innerText = opt; _t.classList.add('reveal'); };
                 optDiv.appendChild(btn);
             });
 
@@ -633,6 +638,15 @@
         });
 
         window.onload = initApp;
+    
+        function revealDialogue(){
+            const t=document.getElementById('target-word');
+            const r=!t.classList.contains('reveal');
+            t.classList.toggle('reveal', r);
+            const b=document.getElementById('dialogue-btn');
+            if(b){ b.textContent = r ? '答えを隠す' : '答えを見る'; b.style.background = r ? '#ef4444' : '#22c55e'; }
+        }
+
     </script>
 </body>
 </html>
