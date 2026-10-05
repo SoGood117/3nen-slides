@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willing p.70-75 解説</title>
+<style>
+:root{
+  --bg:#1f2a37; --paper:#fffdf8; --ink:#1f2937; --sub:#6b7280;
+  --accent:#2563eb; --accent2:#dc2626; --ok:#047857; --soft:#eef4ff; --line:#e5e7eb; --hl:#fff3b0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden;
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);border-radius:14px;padding:48px 64px 56px;
+  display:none;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.slide.active{display:flex}
+.tag{display:inline-block;font-size:18px;font-weight:700;color:#fff;background:var(--accent);padding:4px 14px;border-radius:999px;margin-bottom:10px;align-self:flex-start}
+h1{font-size:60px;line-height:1.25}
+h2{font-size:38px;margin-bottom:6px}
+.lead{font-size:22px;color:var(--sub);margin-bottom:22px}
+.qs{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
+.q{font-size:25px;line-height:1.4;padding:7px 16px;border-left:6px solid var(--line);cursor:pointer;border-radius:6px;transition:background .2s}
+.q:hover{background:#f7f7f7}
+.q .ja{font-size:18px;color:var(--sub);margin-left:12px}
+.q .no{font-weight:700;color:var(--accent);margin-right:8px}
+.ans{display:none;margin-top:2px;font-size:25px}
+.ans b{color:var(--accent2)}
+.ans .why{font-size:18px;color:var(--ok);margin-left:14px}
+.q.open{border-left-color:var(--accent2);background:#fff7f7}
+.q.open .ans{display:block}
+.blank{display:inline-block;min-width:120px;border-bottom:3px solid var(--ink);text-align:center}
+.q.open .blank{color:var(--accent2);font-weight:700;border-bottom-color:var(--accent2)}
+.q .blank .fill{visibility:hidden}
+.q.open .blank .fill{visibility:visible}
+table{border-collapse:collapse;width:100%;font-size:24px}
+th,td{border:2px solid var(--line);padding:10px 16px;text-align:left}
+th{background:var(--soft);color:var(--accent)}
+.box{background:var(--soft);border-radius:12px;padding:20px 26px;font-size:26px;line-height:1.7;margin-bottom:16px}
+.box.red{background:#fff1f1}
+.mk{background:var(--hl);padding:0 4px;border-radius:4px;font-weight:700}
+.arrow{color:var(--accent2);font-weight:700}
+.cols{display:flex;gap:24px}
+.cols>div{flex:1}
+.title-slide{justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fffdf8 60%,#e0ecff)}
+.title-slide .menu{margin-top:30px;font-size:24px;line-height:1.9;color:var(--sub)}
+.foot{position:absolute;bottom:18px;right:28px;font-size:16px;color:var(--sub)}
+.hint{position:absolute;bottom:18px;left:64px;font-size:16px;color:#9ca3af}
+#nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+#nav button{font-size:15px;padding:8px 14px;border:none;border-radius:8px;background:rgba(255,255,255,.88);color:#111;cursor:pointer}
+#nav button:hover{background:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 タイトル -->
+<section class="slide title-slide">
+  <span class="tag">問題集 Willing p.70〜75</span>
+  <h1>不定詞 と 動名詞</h1>
+  <div class="menu">
+    ① Lesson 23：不定詞（to ＋ 動詞の原形）（p.70-71）<br>
+    ② 復習問題⑥：比較・不定詞の仕上げ（p.72）<br>
+    ③ Lesson 24：動名詞（動詞 ＋ -ing）（p.74-75）
+  </div>
+  <div class="hint">→ / スペース で進む　問題をタップで答え表示</div>
+</section>
+
+<!-- 2 不定詞まとめ -->
+<section class="slide">
+  <span class="tag">Lesson 23</span>
+  <h2>不定詞 ＝ to ＋ 動詞の原形</h2>
+  <p class="lead">同じ「to ＋ 原形」でも、3つの意味に使い分ける！</p>
+  <table>
+    <tr><th>用法</th><th>意味</th><th>例</th></tr>
+    <tr><td>名詞的用法</td><td>〜すること</td><td>I want <span class="mk">to work</span>.</td></tr>
+    <tr><td>副詞的用法（目的）</td><td>〜するために</td><td>I went to Canada <span class="mk">to study</span>.</td></tr>
+    <tr><td>副詞的用法（原因）</td><td>〜して（感情の理由）</td><td>I'm glad <span class="mk">to see</span> you.</td></tr>
+    <tr><td>形容詞的用法</td><td>〜するための</td><td>a magazine <span class="mk">to read</span></td></tr>
+  </table>
+  <div class="box red" style="margin-top:14px"><b>too ... to ～</b>「…すぎて～できない」　／　<b>... enough to ～</b>「～できるくらい…」</div>
+  <div class="foot">2</div>
+</section>
+
+<!-- 3 Lesson23 Practice A -->
+<section class="slide">
+  <span class="tag">p.70 Practice A</span>
+  <h2>適切な語句を選ぼう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>I went to Canada ( to study / to studying ) English.<span class="ja">私は英語を勉強するためにカナダへ行った。</span>
+      <div class="ans">→ <b>to study</b><span class="why">「〜するために」＝目的。to のあとは動詞の原形。</span></div></div>
+    <div class="q"><span class="no">(2)</span>Shota is excited ( receiving / to receive ) a love letter.<span class="ja">翔太はラブレターをもらってわくわくしている。</span>
+      <div class="ans">→ <b>to receive</b><span class="why">be excited <b>to ～</b>「〜して…な気持ち」＝感情の原因。</span></div></div>
+    <div class="q"><span class="no">(3)</span>Hitomi is ( enough old / old enough ) to drive a car.<span class="ja">ひとみは車を運転できる年齢だ。</span>
+      <div class="ans">→ <b>old enough</b><span class="why">enough は形容詞の<b>後ろ</b>に置く → old enough to ～。</span></div></div>
+    <div class="q"><span class="no">(4)</span>Emily was ( enough / too ) sleepy to study.<span class="ja">エミリーは眠すぎて勉強できなかった。</span>
+      <div class="ans">→ <b>too</b><span class="why">too ... to ～「…すぎて～できない」。too sleepy to study。</span></div></div>
+  </div>
+  <div class="foot">3</div>
+</section>
+
+<!-- 4 Lesson23 Practice B -->
+<section class="slide">
+  <span class="tag">p.70 Practice B</span>
+  <h2>（　）に適切な語を入れよう</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>We stood in line <span class="blank"><span class="fill">to</span></span> <span class="blank"><span class="fill">get</span></span> a numbered ticket.<span class="ja">私たちは整理券を手に入れるために1列に並んだ。</span>
+      <div class="ans"><span class="why">「〜するために」＝目的 → to ＋ 原形（to get）。</span></div></div>
+    <div class="q"><span class="no">(2)</span>I'm <span class="blank"><span class="fill">glad</span></span> <span class="blank"><span class="fill">to</span></span> see you.<span class="ja">お会いできてうれしいです。</span>
+      <div class="ans"><span class="why">be glad to ～「〜してうれしい」＝感情の原因（happy でも可）。</span></div></div>
+    <div class="q"><span class="no">(3)</span>This question is <span class="blank"><span class="fill">too</span></span> difficult <span class="blank"><span class="fill">to</span></span> answer.<span class="ja">この問題は難しすぎて解けない。</span>
+      <div class="ans"><span class="why">too ＋ 形容詞 ＋ to ～「…すぎて～できない」。</span></div></div>
+    <div class="q"><span class="no">(4)</span>Ayaka left home early <span class="blank"><span class="fill">enough</span></span> <span class="blank"><span class="fill">to</span></span> catch the first train.<span class="ja">絢香は始発電車に乗れるくらい早く家を出ました。</span>
+      <div class="ans"><span class="why">... enough to ～「～できるくらい…」。early enough to catch。</span></div></div>
+  </div>
+  <div class="foot">4</div>
+</section>
+
+<!-- 5 Lesson23 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.70 チャレンジ問題</span>
+  <h2>並べかえよう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>父は家を買うために十分なお金をためようとしている。<br>My father is trying to ( save / to buy / a house / enough / money ).
+      <div class="ans">→ My father is trying to <b>save enough money to buy a house</b>.<span class="why">enough money「十分なお金」＋ to buy「買うために」。</span></div></div>
+    <div class="q"><span class="no">(2)</span>ジョンはコンテストで1位をとるために一生懸命ピアノを練習した。<br>John ( the piano / hard / practiced / win first prize / to ) in the contest.
+      <div class="ans">→ John <b>practiced the piano hard to win first prize</b> in the contest.<span class="why">practiced the piano hard「熱心に練習した」＋ to win「とるために」。</span></div></div>
+    <div class="q"><span class="no">(3)</span>エミリーはその知らせを聞いて驚いた。<br>Emily ( the news / was / to / surprised / hear ).
+      <div class="ans">→ Emily <b>was surprised to hear the news</b>.<span class="why">be surprised to ～「〜して驚く」＝感情の原因。</span></div></div>
+    <div class="q"><span class="no">(4)</span>寒すぎて外では待っていられない。<br>It's ( cold / to / too / outside / wait ).
+      <div class="ans">→ It's <b>too cold to wait outside</b>.<span class="why">too cold to wait「寒すぎて待てない」＋ outside「外で」。</span></div></div>
+  </div>
+  <div class="foot">5</div>
+</section>
+
+<!-- 6 復習⑥ ポイント -->
+<section class="slide">
+  <span class="tag">p.72 復習問題⑥</span>
+  <h2>まず確認！ 比較 と 不定詞</h2>
+  <div class="cols" style="margin-top:10px">
+    <div class="box">
+      <b>比較の形</b><br>
+      原級：as ＋ <span class="mk">原級</span> ＋ as「同じくらい」<br>
+      比較級：<span class="mk">-er</span> / more ＋ than「より」<br>
+      最上級：the <span class="mk">-est</span> / the most ＋ of/in「いちばん」
+    </div>
+    <div class="box red">
+      <b>不定詞（to ＋ 原形）</b><br>
+      want <span class="mk">to</span> ～「〜したい」<br>
+      ～ <span class="mk">to</span> ...「〜するために」（目的）<br>
+      a book <span class="mk">to</span> read「読むための本」
+    </div>
+  </div>
+  <div class="box" style="margin-top:4px">⚠ than があれば<b>比較級</b>、as ～ as なら<b>原級</b>、of/in ＋ the ～est なら<b>最上級</b>！</div>
+  <div class="foot">6</div>
+</section>
+
+<!-- 7 復習⑥ ① -->
+<section class="slide">
+  <span class="tag">p.72 復習問題⑥ ①</span>
+  <h2>適切な語句を選ぼう</h2>
+  <div class="qs" style="gap:4px">
+    <div class="q"><span class="no">(1)</span>Our school is ( older / oldest ) than yours.<span class="ja">私たちの学校はあなたの学校より古い。</span>
+      <div class="ans">→ <b>older</b><span class="why">than があるので比較級。</span></div></div>
+    <div class="q"><span class="no">(2)</span>I am as ( tall than / tall ) as my father.<span class="ja">私は父と同じくらい背が高い。</span>
+      <div class="ans">→ <b>tall</b><span class="why">as ～ as の間は原級（そのままの形）。as tall as。</span></div></div>
+    <div class="q"><span class="no">(3)</span>This is the ( more / most ) popular song of the three.<span class="ja">これは3つの中でいちばん人気のある歌だ。</span>
+      <div class="ans">→ <b>most</b><span class="why">the ＋ 最上級 ＋ of the three。popular は most をつける。</span></div></div>
+    <div class="q"><span class="no">(4)</span>I want ( working / to work ) to help sick people.<span class="ja">私は病気の人々を助けるために働きたい。</span>
+      <div class="ans">→ <b>to work</b><span class="why">want <b>to</b> ～「〜したい」。want のあとは不定詞。</span></div></div>
+    <div class="q"><span class="no">(5)</span>We went to the library ( reading / to read ) books.<span class="ja">私たちは本を読むために図書館へ行った。</span>
+      <div class="ans">→ <b>to read</b><span class="why">「読むために」＝目的の不定詞。</span></div></div>
+  </div>
+  <div class="foot">7</div>
+</section>
+
+<!-- 8 復習⑥ ③ -->
+<section class="slide">
+  <span class="tag">p.72 復習問題⑥ ③</span>
+  <h2>並べかえよう</h2>
+  <div class="qs" style="gap:4px">
+    <div class="q"><span class="no">(1)</span>私は電車の中で読むための雑誌を1冊買いました。<br>( a magazine / to / I / read / bought ) on the train.
+      <div class="ans">→ <b>I bought a magazine to read</b> on the train.<span class="why">a magazine to read「読むための雑誌」＝形容詞的用法。</span></div></div>
+    <div class="q"><span class="no">(2)</span>彼らはその手紙を読んで驚いた。<br>( were / they / read / surprised / to ) the letter.
+      <div class="ans">→ <b>They were surprised to read</b> the letter.<span class="why">be surprised to ～「〜して驚く」。</span></div></div>
+    <div class="q"><span class="no">(3)</span>私は四季の中で秋がいちばん好きです。<br>I ( of / like / the four seasons / the best / fall ).
+      <div class="ans">→ I <b>like fall the best of the four seasons</b>.<span class="why">like ～ the best「～がいちばん好き」＋ of ～「～の中で」。</span></div></div>
+    <div class="q"><span class="no">(4)</span>水が冷たすぎて、私たちは泳ぐことができなかった。<br>The water ( for us / cold / too / was / to swim ).
+      <div class="ans">→ The water <b>was too cold for us to swim</b>.<span class="why">too ... <b>for 人</b> to ～「（人）には…すぎて～できない」。</span></div></div>
+    <div class="q"><span class="no">(5)</span>私は飛行機のチケットのとり方を知らない。<br>I ( an airline ticket / don't / get / to / know / how ).
+      <div class="ans">→ I <b>don't know how to get an airline ticket</b>.<span class="why">how to ～「～のしかた／どう～するか」。</span></div></div>
+  </div>
+  <div class="foot">8</div>
+</section>
+
+<!-- 9 動名詞まとめ -->
+<section class="slide">
+  <span class="tag">Lesson 24</span>
+  <h2>動名詞 ＝ 動詞 ＋ -ing で「〜すること」</h2>
+  <p class="lead">名詞のはたらきをするので、いろいろな位置に置ける！</p>
+  <table>
+    <tr><th>位置</th><th>例</th></tr>
+    <tr><td>主語（〜することは）</td><td><span class="mk">Walking</span> is good for your health.</td></tr>
+    <tr><td>目的語（〜することを）</td><td>I like <span class="mk">singing</span>. ／ I finished <span class="mk">doing</span> …</td></tr>
+    <tr><td>補語（〜することです）</td><td>Your job is <span class="mk">washing</span> …</td></tr>
+    <tr><td>前置詞の後ろ</td><td>interested in <span class="mk">writing</span> ／ thank you for <span class="mk">helping</span></td></tr>
+  </table>
+  <div class="box red" style="margin-top:12px"><b>stop に注意！</b>　stop <b>-ing</b>「〜するのをやめる」　／　stop <b>to ～</b>「〜するために立ち止まる」</div>
+  <div class="foot">9</div>
+</section>
+
+<!-- 10 Lesson24 Practice A -->
+<section class="slide">
+  <span class="tag">p.74 Practice A</span>
+  <h2>適切な語句を選ぼう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>( Walk / Walking ) is good for your health.<span class="ja">歩くことは健康によい。</span>
+      <div class="ans">→ <b>Walking</b><span class="why">主語は「〜すること」＝動名詞。文頭なので大文字。</span></div></div>
+    <div class="q"><span class="no">(2)</span>I like ( sing / singing ) karaoke.<span class="ja">私はカラオケで歌うのが好きだ。</span>
+      <div class="ans">→ <b>singing</b><span class="why">like ＋ -ing「〜するのが好き」（to sing も可だが選択肢は singing）。</span></div></div>
+    <div class="q"><span class="no">(3)</span>My father stopped ( to smoke / smoking ) last year.<span class="ja">父は去年タバコをやめた。</span>
+      <div class="ans">→ <b>smoking</b><span class="why">stop ＋ -ing「〜するのをやめる」。to smoke だと「吸うために立ち止まった」。</span></div></div>
+    <div class="q"><span class="no">(4)</span>I finished ( to do / doing ) my homework.<span class="ja">私は宿題をし終えた。</span>
+      <div class="ans">→ <b>doing</b><span class="why">finish は後ろに <b>-ing</b> だけをとる（finish to do は✕）。</span></div></div>
+  </div>
+  <div class="foot">10</div>
+</section>
+
+<!-- 11 Lesson24 Practice B -->
+<section class="slide">
+  <span class="tag">p.74 Practice B</span>
+  <h2>（　）に適切な語を入れよう</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>Daisuke <span class="blank"><span class="fill">likes</span></span> <span class="blank"><span class="fill">playing</span></span> baseball.<span class="ja">大輔は野球をするのが好きだ。</span>
+      <div class="ans"><span class="why">主語は3人称単数 → likes。like ＋ -ing（to play も可）。</span></div></div>
+    <div class="q"><span class="no">(2)</span>Tom is <span class="blank"><span class="fill">looking</span></span> <span class="blank"><span class="fill">forward</span></span> <span class="blank"><span class="fill">to</span></span> <span class="blank"><span class="fill">watching</span></span> the Olympic Games.<span class="ja">トムはオリンピックの試合を観るのを楽しみにしている。</span>
+      <div class="ans"><span class="why">look forward to ＋ <b>-ing</b>「〜するのを楽しみにする」。この to は前置詞。</span></div></div>
+    <div class="q"><span class="no">(3)</span>Emma <span class="blank"><span class="fill">is</span></span> <span class="blank"><span class="fill">interested</span></span> <span class="blank"><span class="fill">in</span></span> <span class="blank"><span class="fill">writing</span></span> novels.<span class="ja">エマは小説を書くことに興味がある。</span>
+      <div class="ans"><span class="why">be interested in ＋ <b>-ing</b>「〜することに興味がある」。</span></div></div>
+    <div class="q"><span class="no">(4)</span><span class="blank"><span class="fill">How</span></span> <span class="blank"><span class="fill">about</span></span> <span class="blank"><span class="fill">going</span></span> to the movies?<span class="ja">映画に行くのはどうですか。</span>
+      <div class="ans"><span class="why">How about ＋ <b>-ing</b>?「〜するのはどう？」と誘う表現。</span></div></div>
+  </div>
+  <div class="foot">11</div>
+</section>
+
+<!-- 12 Lesson24 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.74 チャレンジ問題</span>
+  <h2>並べかえよう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>雨がふり始めた。<br>( raining / it / started ).
+      <div class="ans">→ <b>It started raining</b>.<span class="why">start は -ing も to も可。ここは語群から raining。</span></div></div>
+    <div class="q"><span class="no">(2)</span>リサイクルすることは環境にとって大切です。<br>( important / recycling / is ) for the environment.
+      <div class="ans">→ <b>Recycling is important</b> for the environment.<span class="why">Recycling「リサイクルすること」が主語（動名詞）。</span></div></div>
+    <div class="q"><span class="no">(3)</span>あなたの仕事は野菜を洗うことです。<br>( the vegetables / your job / washing / is ).
+      <div class="ans">→ <b>Your job is washing the vegetables</b>.<span class="why">washing …「〜すること」が補語（＝ Your job の中身）。</span></div></div>
+    <div class="q"><span class="no">(4)</span>手伝ってくれてありがとう。<br>( me / thank / helping / you / for ).
+      <div class="ans">→ <b>Thank you for helping me</b>.<span class="why">thank you for ＋ <b>-ing</b>「〜してくれてありがとう」。</span></div></div>
+  </div>
+  <div class="foot">12</div>
+</section>
+
+<!-- 13 まとめ -->
+<section class="slide">
+  <span class="tag">まとめ</span>
+  <h2>今日のポイント 3つ</h2>
+  <div class="qs" style="gap:16px">
+    <div class="box">① <b>不定詞（to ＋ 原形）</b>：目的「〜するために」／ too ... to「…すぎて〜できない」／ ... enough to「〜できるくらい…」</div>
+    <div class="box">② <b>動名詞（-ing）</b>は「〜すること」。主語・目的語・補語・<b>前置詞の後ろ</b>に置ける（in / to / for ＋ -ing）</div>
+    <div class="box red">③ 動詞の後ろの形に注意：finish・enjoy は <b>-ing だけ</b>／ want・decide は <b>to だけ</b>／ like・start は<b>どちらも</b>（stop は意味が変わる）</div>
+  </div>
+  <div class="foot">13</div>
+</section>
+
+</div>
+
+<div id="nav">
+  <button onclick="go(-1)">◀ 前</button>
+  <button onclick="revealAll()">答えを全部</button>
+  <button onclick="hideAll()">隠す</button>
+  <button onclick="fs()">全画面</button>
+  <button onclick="go(1)">次 ▶</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].classList.add('active');}
+function go(d){show(cur+d);}
+function qs(){return [...slides[cur].querySelectorAll('.q')];}
+function step(){const h=qs().find(q=>!q.classList.contains('open'));if(h)h.classList.add('open');else go(1);}
+function revealAll(){qs().forEach(q=>q.classList.add('open'));}
+function hideAll(){qs().forEach(q=>q.classList.remove('open'));}
+function fs(){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}catch(e){}}
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',e=>{e.stopPropagation();q.classList.toggle('open');}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  else if(e.key===' '||e.key==='Enter'){e.preventDefault();step();}
+  else if(e.key==='a')revealAll();
+  else if(e.key==='f')fs();
+});
+let sx=null;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?1:-1);sx=null;});
+function fit(){const s=Math.min(innerWidth/1300,(innerHeight-50)/740);document.getElementById('stage').style.transform=`translate(-50%,-50%) translate(0,-18px) scale(${s})`;}
+addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>
