@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10: The Culture of Selfies - Focus & Try</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; overflow: hidden; background-color: #f3f4f6; }
+        .slide { display: none; height: 100vh; width: 100vw; padding: 4vh 2.5vw 84px; flex-direction: column; align-items: center; }
+        .slide.active { display: flex; }
+        .bg-stage { background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), linear-gradient(135deg, #7c3aed 0%, #db2777 50%, #f59e0b 100%); }
+        .slide-title { font-size: clamp(2.0rem, 4.5vh, 3.5rem); font-weight: 900; margin-bottom: 0.75rem; text-align: center; }
+        .content-box { flex: 1; width: 100%; max-width: 100%; overflow-y: auto; border-radius: 1.5rem; padding: 1.5rem 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); background-color: white; }
+        .hidden-answer { display: inline-block; color: transparent !important; border-bottom: 3px solid #ea580c !important; padding: 0 8px; margin: 0 4px; cursor: pointer; min-width: 120px; text-align: center; vertical-align: baseline; white-space: nowrap; transition: color 0.2s; }
+        .hidden-answer.show { color: #ea580c !important; font-weight: bold; }
+        .example-sentence { font-size: clamp(1.4rem, 2.9vh, 2.2rem); line-height: 1.4; margin-bottom: 0.4rem; font-weight: bold; color: #1f2937; }
+        .example-ja { font-size: clamp(1.05rem, 2.1vh, 1.6rem); color: #6b7280; margin-bottom: 0.7rem; }
+        .keyword { color: #ea580c; font-weight: 900; }
+        .grammar-box { background: #fff7ed; border-left: 6px solid #ea580c; padding: 0.9rem 1.3rem; border-radius: 0 12px 12px 0; margin-bottom: 0.8rem; font-size: clamp(1.2rem, 2.5vh, 1.9rem); line-height: 1.5; }
+        .try-q { font-size: clamp(1.4rem, 2.9vh, 2.2rem); line-height: 1.4; margin-bottom: 0.3rem; font-weight: bold; }
+        .try-ja { font-size: clamp(1.05rem, 2.1vh, 1.6rem); color: #6b7280; margin-bottom: 0.7rem; }
+        .word-bank { display: inline-flex; gap: 12px; flex-wrap: wrap; padding: 10px 18px; background: #fef3c7; border-radius: 12px; margin-bottom: 1rem; }
+        .word-bank span { font-size: clamp(1.3rem, 2.4vh, 1.9rem); font-weight: bold; color: #92400e; }
+        .focus-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+        .focus-table th { background: #fff7ed; color: #ea580c; font-size: 1.1rem; padding: 8px 12px; text-align: left; border: 1px solid #fed7aa; }
+        .focus-table td { padding: 10px 12px; border: 1px solid #fed7aa; font-size: 1.25rem; vertical-align: top; }
+        .focus-table .label-cell { font-size: 1.05rem; color: #9a3412; font-weight: bold; background: #fff7ed; width: 200px; }
+        .focus-table .ja-cell { font-size: 1.05rem; color: #6b7280; }
+        .focus-table .rule-cell { font-size: 1.0rem; color: #9a3412; background: #fffbeb; width: 260px; line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active bg-stage text-white justify-center text-center">
+        <h1 class="text-7xl font-black mb-8 leading-tight">Lesson 10: The Culture of Selfies</h1>
+        <p class="text-4xl opacity-90">Focus &amp; Try</p>
+    </div>
+
+    <!-- Slide 2: Focus 1 - 関係代名詞(制限用法) -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 1</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「〜な…」「〜する…」　関係代名詞（制限用法）</p>
+
+            <p class="example-sentence">The right picture is a selfie <span class="keyword">which</span> was taken by Joseph Byron.</p>
+            <p class="example-ja">右の写真は、ジョセフ・バイロンによって撮られた自撮り写真です。</p>
+
+            <div class="grammar-box">
+                「〜する…（名詞）」のように、名詞を文で説明するときに<strong>関係代名詞</strong>を用います。説明される名詞のことを<strong>「先行詞」</strong>と言います。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <td class="label-cell">主格</td>
+                    <td>
+                        <p class="font-bold">I know a girl <span class="keyword">who</span> has been to Finland.</p>
+                        <p class="ja-cell">私はフィンランドに行ったことがある少女を知っています。</p>
+                    </td>
+                    <td class="rule-cell">先行詞が人 → <strong>who / that</strong><br>先行詞が人以外 → <strong>which / that</strong></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">目的格</td>
+                    <td>
+                        <p class="font-bold">The lady <span class="keyword">who</span> you met yesterday was Yumi.</p>
+                        <p class="ja-cell">あなたが昨日会った女性は優美です。</p>
+                    </td>
+                    <td class="rule-cell">先行詞が人 → <strong>who［whom］/ that</strong><br>先行詞が人以外 → <strong>which / that</strong></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">所有格</td>
+                    <td>
+                        <p class="font-bold">Look at the dog <span class="keyword">whose</span> eyes are blue.</p>
+                        <p class="ja-cell">その眼が青いイヌを見てください。</p>
+                    </td>
+                    <td class="rule-cell">先行詞が人・人以外の両方 → <strong>whose</strong></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 3: Focus 2 - 関係代名詞(非制限用法) -->
+    <div class="slide bg-white">
+        <h2 class="slide-title text-orange-600">Focus 2</h2>
+        <div class="content-box bg-orange-50 border border-orange-100">
+            <p class="text-xl font-black text-orange-700 mb-3">「（ちなみに）〜ですが」　関係代名詞（非制限用法）</p>
+
+            <p class="example-sentence">Selfies, <span class="keyword">which</span> seem casual, might be a new way to express ourselves artistically.</p>
+            <p class="example-ja">自撮りはカジュアルに見えますが、自分たち自身を芸術的に表す新しい方法かもしれません。</p>
+
+            <div class="grammar-box">
+                名詞を文の形で補足説明するときは、先行詞となる名詞と関係代名詞の間に<strong>カンマ (,)</strong> を置きます。
+            </div>
+
+            <table class="focus-table">
+                <tr>
+                    <td class="label-cell">制限用法<br><span style="font-size:0.9rem;font-weight:normal;">（カンマなし）</span></td>
+                    <td>
+                        <p class="font-bold">Mr. Yoshida has two sons <span class="keyword">who</span> are high school students.</p>
+                        <p class="ja-cell">吉田先生には高校生の息子が2人います。（高校生でない息子がほかにもいるかもしれない。）</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">非制限用法<br><span style="font-size:0.9rem;font-weight:normal;">（カンマあり）</span></td>
+                    <td>
+                        <p class="font-bold">Mr. Yoshida has two sons<span class="keyword">,</span> who are high school students.</p>
+                        <p class="ja-cell">吉田先生には息子が2人いて、彼らは高校生です。（息子は2人しかいない。）</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Slide 4: TRY 1 - who/which -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 1</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）に who または which を入れましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① This is a fish ( <span class="hidden-answer" onclick="this.classList.toggle('show')">which</span> ) Ken likes very much.</p>
+                <p class="try-ja">これは健が大好きな魚です。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② He got the fish from a friend ( <span class="hidden-answer" onclick="this.classList.toggle('show')">who</span> ) likes fishing.</p>
+                <p class="try-ja">彼はその魚を、釣りが好きな友だちからもらいました。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ He baked it in a new oven ( <span class="hidden-answer" onclick="this.classList.toggle('show')">which</span> ) he bought last week.</p>
+                <p class="try-ja">彼は先週買った新しいオーブンでそれを焼きました。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: TRY 2 - 語句選択 -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 2</h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-4">日本語に合うように、最も適する語を下から選び、（　）に入れましょう。</p>
+            <div class="word-bank"><span>admires</span><span>/</span><span>perspective</span><span>/</span><span>photographer</span></div>
+
+            <div class="mb-6">
+                <p class="try-q">① Yuko is a ( <span class="hidden-answer" onclick="this.classList.toggle('show')">photographer</span> ).</p>
+                <p class="try-ja">優子は写真家です。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② She ( <span class="hidden-answer" onclick="this.classList.toggle('show')">admires</span> ) Ninagawa Mika.</p>
+                <p class="try-ja">彼女は（写真家の）蜷川実花を尊敬しています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ She wants to give us a new ( <span class="hidden-answer" onclick="this.classList.toggle('show')">perspective</span> ) on how to use colors like Ninagawa.</p>
+                <p class="try-ja">彼女は蜷川さんのように、色の使い方に新たな視点を与えたいと思っています。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: TRY 3 - 語句並べかえ -->
+    <div class="slide bg-yellow-50">
+        <h2 class="slide-title text-orange-600">Try 3 <span style="font-size:1.3rem;color:#9a3412;">［復習・発展］</span></h2>
+        <div class="content-box border border-orange-100">
+            <p class="text-xl font-black text-orange-600 mb-6">日本語に合うように、（　）内の語句を並べかえましょう。</p>
+
+            <div class="mb-6">
+                <p class="try-q">① Ryan thinks drawing ( to / is / way / a good ) express himself.</p>
+                <p class="try-q" style="margin-top:8px;">→ Ryan thinks drawing <span class="hidden-answer" onclick="this.classList.toggle('show')">is a good way to</span> express himself.</p>
+                <p class="try-ja">ライアンは、絵を描くことが自分自身を表現するよい方法であると思っています。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">② He always ( himself / as / draws / a man ) who is very handsome.</p>
+                <p class="try-q" style="margin-top:8px;">→ He always <span class="hidden-answer" onclick="this.classList.toggle('show')">draws himself as a man</span> who is very handsome.</p>
+                <p class="try-ja">彼はいつも自分自身をとてもハンサムな男性として描きます。</p>
+            </div>
+            <div class="mb-6">
+                <p class="try-q">③ His friend ( his / finds / artistic / paintings ).</p>
+                <p class="try-q" style="margin-top:8px;">→ His friend <span class="hidden-answer" onclick="this.classList.toggle('show')">finds his paintings artistic</span>.</p>
+                <p class="try-ja">彼の友だちは、彼の絵が芸術的であるとわかっています。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center space-x-4">
+        <button onclick="prevSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">PREV</button>
+        <div id="slide-indicator" class="bg-white px-6 py-2 rounded-xl font-bold border shadow-sm">1 / 6</div>
+        <button onclick="nextSlide()" class="bg-black/70 text-white px-6 py-2 rounded-xl font-bold hover:bg-black transition">NEXT</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 6;
+        function updateSlideDisplay() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+            document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
+        }
+        function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlideDisplay(); } }
+        function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlideDisplay(); } }
+
+        // --- 自動フィット: 枠からあふれる時だけ、そのスライドを収まる倍率に縮める ---
+        function fitActiveSlide(){
+            const s = document.querySelector('.slide.active');
+            if(!s) return;
+            s.querySelectorAll('.content-box').forEach(box=>{
+                // グリッドかどうかは「クラス名」で判定（描画タイミングに依存させない）
+                const isGrid = box.classList.contains('grid');
+                let wrap = box.querySelector(':scope > .fit-wrap');
+                if(!wrap){
+                    // 枠の中身を1枚の入れ物にまとめ、それだけを縮める（枠のサイズは固定）
+                    wrap = document.createElement('div');
+                    wrap.className = 'fit-wrap';
+                    wrap.style.width = '100%';
+                    wrap.style.transformOrigin = 'top center';
+                    if(isGrid){
+                        // グリッドの列数・間隔を確実に入れ物側へ再現し、枠は通常ブロックに
+                        let cols = 1, gap = '1.25rem';
+                        box.classList.forEach(c=>{ const m=c.match(/^(?:md:)?grid-cols-(\d+)$/); if(m) cols=Math.max(cols,parseInt(m[1])); });
+                        box.classList.forEach(c=>{ const m=c.match(/^gap-(\d+)$/); if(m) gap=(parseInt(m[1])*0.25)+'rem'; });
+                        wrap.style.display = 'grid';
+                        wrap.style.gridTemplateColumns = 'repeat(' + cols + ',minmax(0,1fr))';
+                        wrap.style.gap = gap;
+                        [...box.classList].forEach(c=>{ if(/^(grid$|(?:md:)?grid-cols-\d+$|grid-rows-|gap-\d+$)/.test(c)){ box.classList.remove(c);} });
+                        box.style.display = 'block';
+                    } else {
+                        // 子要素どうしの間隔クラスだけ入れ物へ移す（枠のflex中央寄せは残す）
+                        [...box.classList].forEach(c=>{ if(/^(gap-\d+$|space-[xy]-\d+$)/.test(c)){ box.classList.remove(c); wrap.classList.add(c);} });
+                    }
+                    while(box.firstChild){ wrap.appendChild(box.firstChild); }
+                    box.appendChild(wrap);
+                }
+                wrap.style.transform = 'none';
+                box.style.overflow = 'hidden';
+                const cs = getComputedStyle(box);
+                const pt = parseFloat(cs.paddingTop) || 0;
+                const pb = parseFloat(cs.paddingBottom) || 0;
+                const avail = box.clientHeight - pt - pb;
+                const need = wrap.scrollHeight;
+                if(need > avail - 1 && need > 0){
+                    if(!isGrid){ box.style.justifyContent = 'flex-start'; }
+                    wrap.style.transform = 'scale(' + (avail / need) + ')';
+                } else {
+                    if(!isGrid){ box.style.justifyContent = ''; }
+                }
+            });
+        }
+        const _origUpdateSlideDisplay = updateSlideDisplay;
+        updateSlideDisplay = function(){ _origUpdateSlideDisplay(); requestAnimationFrame(fitActiveSlide); };
+        window.addEventListener('load', () => requestAnimationFrame(fitActiveSlide));
+        window.addEventListener('resize', () => requestAnimationFrame(fitActiveSlide));
+        if(document.fonts && document.fonts.ready){ document.fonts.ready.then(() => requestAnimationFrame(fitActiveSlide)); }
+        setTimeout(fitActiveSlide, 400);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+    </script>
+</body>
+</html>
