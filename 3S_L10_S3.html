@@ -775,7 +775,7 @@
 
     <script>
         let currentSlide = 0;
-        const TOTAL_SLIDES = 10;
+        const TOTAL_SLIDES = document.querySelectorAll('.slide').length;
 
         function makeSlashable(container, html) {
             container.innerHTML = html;
