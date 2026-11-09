@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willing p.76-79 解説</title>
+<style>
+:root{
+  --bg:#1f2a37; --paper:#fffdf8; --ink:#1f2937; --sub:#6b7280;
+  --accent:#2563eb; --accent2:#dc2626; --ok:#047857; --soft:#eef4ff; --line:#e5e7eb; --hl:#fff3b0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden;
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);border-radius:14px;padding:48px 64px 56px;
+  display:none;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.slide.active{display:flex}
+.tag{display:inline-block;font-size:18px;font-weight:700;color:#fff;background:var(--accent);padding:4px 14px;border-radius:999px;margin-bottom:10px;align-self:flex-start}
+.tag.g{background:var(--ok)}
+h1{font-size:56px;line-height:1.25}
+h2{font-size:38px;margin-bottom:6px}
+.lead{font-size:22px;color:var(--sub);margin-bottom:22px}
+.qs{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
+.q{font-size:25px;line-height:1.4;padding:7px 16px;border-left:6px solid var(--line);cursor:pointer;border-radius:6px;transition:background .2s}
+.q:hover{background:#f7f7f7}
+.q .ja{font-size:18px;color:var(--sub);margin-left:12px}
+.q .no{font-weight:700;color:var(--accent);margin-right:8px}
+.ans{display:none;margin-top:2px;font-size:25px}
+.ans b{color:var(--accent2)}
+.ans .why{font-size:18px;color:var(--ok);margin-left:14px}
+.q.open{border-left-color:var(--accent2);background:#fff7f7}
+.q.open .ans{display:block}
+.blank{display:inline-block;min-width:110px;border-bottom:3px solid var(--ink);text-align:center}
+.q.open .blank{color:var(--accent2);font-weight:700;border-bottom-color:var(--accent2)}
+.q .blank .fill{visibility:hidden}
+.q.open .blank .fill{visibility:visible}
+table{border-collapse:collapse;width:100%;font-size:24px}
+th,td{border:2px solid var(--line);padding:10px 14px;text-align:center}
+th{background:var(--soft);color:var(--accent)}
+.box{background:var(--soft);border-radius:12px;padding:18px 24px;font-size:24px;line-height:1.65;margin-bottom:14px}
+.box.red{background:#fff1f1}
+.mk{background:var(--hl);padding:0 4px;border-radius:4px;font-weight:700}
+.arrow{color:var(--accent2);font-weight:700}
+.cols{display:flex;gap:24px}
+.cols>div{flex:1}
+.wgrid{display:flex;flex-wrap:wrap;gap:10px 18px}
+.wgrid .q{flex:1 1 30%;min-width:280px}
+.title-slide{justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fffdf8 60%,#e0ecff)}
+.title-slide .menu{margin-top:26px;font-size:23px;line-height:1.8;color:var(--sub)}
+.foot{position:absolute;bottom:18px;right:28px;font-size:16px;color:var(--sub)}
+.hint{position:absolute;bottom:18px;left:64px;font-size:16px;color:#9ca3af}
+#nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+#nav button{font-size:15px;padding:8px 14px;border:none;border-radius:8px;background:rgba(255,255,255,.88);color:#111;cursor:pointer}
+#nav button:hover{background:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 タイトル -->
+<section class="slide title-slide">
+  <span class="tag">問題集 Willing p.76〜79</span>
+  <h1>分詞<br>／ 関係代名詞</h1>
+  <div class="menu">
+    ① Lesson 25　現在分詞・過去分詞（名詞を説明）p.76〜77<br>
+    ② Lesson 26　関係代名詞（who / which / that）p.78〜79
+  </div>
+  <div class="hint">→ / スペース で進む　問題をタップで答え表示</div>
+</section>
+
+<!-- 2 L25 ポイント -->
+<section class="slide">
+  <span class="tag">Lesson 25　Point</span>
+  <h2>分詞が名詞を説明する</h2>
+  <div class="cols" style="margin-top:6px">
+    <div class="box"><b>現在分詞 -ing</b>「〜している」<br>
+      the <span class="mk">sleeping</span> princess<br>
+      （眠っているお姫さま）</div>
+    <div class="box red"><b>過去分詞</b>「〜される・された」<br>
+      規則 → -ed ／ 不規則 → 不規則な形<br>
+      the <span class="mk">broken</span> bed（こわれたベッド）</div>
+  </div>
+  <div class="box" style="margin-top:4px">置く場所のルール：<br>
+    ・分詞が <b>1語だけ</b> → 名詞の <span class="mk">前</span>（the crying girl）<br>
+    ・分詞が <b>他の語句を伴う</b> → 名詞の <span class="mk">後ろ</span>（the girl <b>crying on the street</b>）</div>
+  <div class="foot">2</div>
+</section>
+
+<!-- 3 L25 Get Ready -->
+<section class="slide">
+  <span class="tag">p.76 Get Ready</span>
+  <h2>意味を書こう（進行形と受け身の復習）</h2>
+  <div class="qs">
+    <div class="q"><span class="no">(1)</span>The girl is dancing.
+      <div class="ans">→ <b>その少女は踊っている。</b><span class="why">be ＋ -ing ＝進行形「〜している」</span></div></div>
+    <div class="q"><span class="no">(2)</span>My bike was stolen.
+      <div class="ans">→ <b>私の自転車は盗まれた。</b><span class="why">be ＋ 過去分詞 ＝受け身「〜された」</span></div></div>
+  </div>
+  <div class="foot">3</div>
+</section>
+
+<!-- 4 L25 Practice A -->
+<section class="slide">
+  <span class="tag">p.77 Practice A</span>
+  <h2>適切な語句を選ぼう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>the ( train moving / moving train )
+      <div class="ans">→ <b>moving train</b><span class="why">分詞1語 → 名詞の前。「動いている電車」</span></div></div>
+    <div class="q"><span class="no">(2)</span>the ( standing boy / boy standing ) at the door
+      <div class="ans">→ <b>boy standing</b> at the door<span class="why">at the door を伴う → 名詞の後ろ。「ドアに立っている少年」</span></div></div>
+    <div class="q"><span class="no">(3)</span>the ( fry chicken / fried chicken )
+      <div class="ans">→ <b>fried chicken</b><span class="why">「揚げられた」＝過去分詞 fried。1語なので前。</span></div></div>
+    <div class="q"><span class="no">(4)</span>the ( book written / written book ) by Sakura Momoko
+      <div class="ans">→ <b>book written</b> by Sakura Momoko<span class="why">by 〜 を伴う → 名詞の後ろ。「さくらももこが書いた本」</span></div></div>
+  </div>
+  <div class="foot">4</div>
+</section>
+
+<!-- 5 L25 Practice B -->
+<section class="slide">
+  <span class="tag">p.77 Practice B</span>
+  <h2>〈 〉の動詞を適切な形にしよう</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>Look at those (　) birds. 〈fly〉<span class="ja">あの飛んでいる鳥を見て。</span>
+      <div class="ans">→ <b>flying</b><span class="why">「飛んでいる」＝現在分詞。1語で名詞の前。</span></div></div>
+    <div class="q"><span class="no">(2)</span>My brother bought a (　) car at that shop. 〈use〉<span class="ja">兄は中古車を買った。</span>
+      <div class="ans">→ <b>used</b><span class="why">「使われた」＝過去分詞。used car ＝中古車。</span></div></div>
+    <div class="q"><span class="no">(3)</span>We use (　) paper at our school. 〈recycle〉<span class="ja">学校で再生紙を使っている。</span>
+      <div class="ans">→ <b>recycled</b><span class="why">「再生された」＝過去分詞。recycled paper ＝再生紙。</span></div></div>
+    <div class="q"><span class="no">(4)</span>Can you catch a fish (　) in the water? 〈swim〉<span class="ja">水中を泳いでいる魚。</span>
+      <div class="ans">→ <b>swimming</b><span class="why">in the water を伴う → 名詞の後ろ。現在分詞。</span></div></div>
+    <div class="q"><span class="no">(5)</span>The story (　) by my grandmother was very interesting. 〈tell〉<span class="ja">祖母によって話された物語。</span>
+      <div class="ans">→ <b>told</b><span class="why">by 〜 を伴う → 名詞の後ろ。「話された」＝過去分詞 told。</span></div></div>
+  </div>
+  <div class="foot">5</div>
+</section>
+
+<!-- 6 L25 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.77 チャレンジ問題</span>
+  <h2>並べかえよう</h2>
+  <div class="box">分詞が<b>語句を伴う</b>ときは、まず<span class="mk">名詞</span>を置いて、その<span class="mk">後ろ</span>に分詞のカタマリ！</div>
+  <div class="qs">
+    <div class="q"><span class="no">(1)</span>翔太とダンスをしている女の子はエミリーです。<br>The girl ( with / Shota / dancing / is ) Emily.
+      <div class="ans">→ The girl <b>dancing with Shota is</b> Emily.<span class="why">girl ＋ dancing with Shota（現在分詞のカタマリ）＋ is。</span></div></div>
+    <div class="q"><span class="no">(2)</span>これはヴァン・ゴッホによって描かれた絵です。<br>This is ( Van Gogh / painted / the picture / by ).
+      <div class="ans">→ This is <b>the picture painted by Van Gogh.</b><span class="why">the picture ＋ painted by 〜（過去分詞のカタマリ）。</span></div></div>
+    <div class="q"><span class="no">(3)</span>私たちは路上に捨てられた缶を拾った。<br>We picked up ( away / the cans / thrown / on the road ).
+      <div class="ans">→ We picked up <b>the cans thrown away on the road.</b><span class="why">the cans ＋ thrown away 〜（過去分詞のカタマリ）。</span></div></div>
+  </div>
+  <div class="foot">6</div>
+</section>
+
+<!-- 7 L25 たんご -->
+<section class="slide">
+  <span class="tag g">p.77 たんご・タンゴ・単語！</span>
+  <h2>〈過去分詞＋名詞〉の意味</h2>
+  <p class="lead">決まった表現としてよく使う（タップで答え）</p>
+  <div class="qs wgrid">
+    <div class="q"><span class="no">①</span>boiled egg<div class="ans">→ <b>ゆで卵</b></div></div>
+    <div class="q"><span class="no">②</span>used car<div class="ans">→ <b>中古車</b></div></div>
+    <div class="q"><span class="no">③</span>frozen food<div class="ans">→ <b>冷凍食品</b></div></div>
+    <div class="q"><span class="no">④</span>fried chicken<div class="ans">→ <b>フライドチキン</b></div></div>
+    <div class="q"><span class="no">⑤</span>recycled paper<div class="ans">→ <b>再生紙</b></div></div>
+    <div class="q"><span class="no">⑥</span>mashed potatoes<div class="ans">→ <b>マッシュポテト</b></div></div>
+  </div>
+  <div class="foot">7</div>
+</section>
+
+<!-- 8 L26 ポイント -->
+<section class="slide">
+  <span class="tag">Lesson 26　Point</span>
+  <h2>関係代名詞 who / which / that</h2>
+  <p class="lead">2つの文をつなぎ、前の名詞（先行詞）を後ろから説明する</p>
+  <table>
+    <tr><th>先行詞</th><th>主格「〜は・が」</th><th>目的格「〜を」</th></tr>
+    <tr><td>人</td><td>who</td><td>who(m)</td></tr>
+    <tr><td>人以外（もの・動物）</td><td>which</td><td>which</td></tr>
+    <tr><td>どちらでも</td><td>that</td><td>that</td></tr>
+  </table>
+  <div class="box" style="margin-top:12px">
+    主格 → 直後に<b>動詞</b>：a friend <span class="mk">who lives</span> in Italy<br>
+    目的格 → 直後に<b>主語＋動詞</b>：a photo <span class="mk">(which) he took</span>（<b>目的格は省略できる</b>）</div>
+  <div class="foot">8</div>
+</section>
+
+<!-- 9 L26 Get Ready -->
+<section class="slide">
+  <span class="tag">p.78 Get Ready</span>
+  <h2>適切な関係代名詞を選ぼう</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>I know a boy ( who / which ) cooks well.
+      <div class="ans">→ <b>who</b><span class="why">先行詞 a boy ＝人、直後に動詞 cooks（主格）。</span></div></div>
+    <div class="q"><span class="no">(2)</span>Betty lives in a house ( who / which ) has a swimming pool.
+      <div class="ans">→ <b>which</b><span class="why">先行詞 a house ＝もの → which。</span></div></div>
+    <div class="q"><span class="no">(3)</span>She is the girl ( that / which ) I met yesterday.
+      <div class="ans">→ <b>that</b><span class="why">先行詞 the girl ＝人。which は人に使えない → that。</span></div></div>
+    <div class="q"><span class="no">(4)</span>The book ( who / that ) you lent me yesterday was interesting.
+      <div class="ans">→ <b>that</b><span class="why">先行詞 the book ＝もの。who は人用 → that。</span></div></div>
+  </div>
+  <div class="foot">9</div>
+</section>
+
+<!-- 10 L26 Practice A -->
+<section class="slide">
+  <span class="tag">p.79 Practice A</span>
+  <h2>適切な語を選ぼう（×＝省略できる）</h2>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>A koala is an animal ( who / which / × ) lives in Australia.
+      <div class="ans">→ <b>which</b><span class="why">動物＝もの、直後に動詞 lives（主格）→ 省略不可。</span></div></div>
+    <div class="q"><span class="no">(2)</span>Look at the house ( who / which / × ) stands by the river.
+      <div class="ans">→ <b>which</b><span class="why">もの＋主格（stands）→ 省略不可。</span></div></div>
+    <div class="q"><span class="no">(3)</span>Bob is a boy ( who / which / × ) likes collecting DVDs.
+      <div class="ans">→ <b>who</b><span class="why">人＋主格（likes）→ who。</span></div></div>
+    <div class="q"><span class="no">(4)</span>Is this the comic book ( who / whom / × ) you bought last week?
+      <div class="ans">→ <b>×</b><span class="why">もの＋後ろが you bought（目的格）→ 省略できる。</span></div></div>
+    <div class="q"><span class="no">(5)</span>Brad Pitt is an actor ( which / what / × ) I like very much.
+      <div class="ans">→ <b>×</b><span class="why">人＋後ろが I like（目的格）→ 省略できる。which/what は不可。</span></div></div>
+  </div>
+  <div class="foot">10</div>
+</section>
+
+<!-- 11 L26 Practice B -->
+<section class="slide">
+  <span class="tag">p.79 Practice B</span>
+  <h2>説明している語句はどこ？／意味は？</h2>
+  <p class="lead">［名詞］を説明している語句（タップで下線部と意味）</p>
+  <div class="qs" style="gap:6px">
+    <div class="q"><span class="no">(1)</span>Yonezu Kenshi is <u>the man</u> who wrote Lemon.
+      <div class="ans">説明部 → <b>who wrote Lemon</b>　／　「米津玄師はLemonを書いた人です。」</div></div>
+    <div class="q"><span class="no">(2)</span>I have <u>a friend</u> who comes from India.
+      <div class="ans">説明部 → <b>who comes from India</b>　／　「私にはインド出身の友達がいます。」</div></div>
+    <div class="q"><span class="no">(3)</span>I lost <u>the watch</u> I bought yesterday.
+      <div class="ans">説明部 → <b>(which) I bought yesterday</b>　／　「私は昨日買った腕時計をなくしました。」<span class="why">関係代名詞（目的格）が省略されている。</span></div></div>
+    <div class="q"><span class="no">(4)</span><u>The woman</u> who I saw at the station was a famous singer.
+      <div class="ans">説明部 → <b>who I saw at the station</b>　／　「私が駅で見た女性は有名な歌手でした。」</div></div>
+  </div>
+  <div class="foot">11</div>
+</section>
+
+<!-- 12 L26 チャレンジ -->
+<section class="slide">
+  <span class="tag">p.79 チャレンジ問題</span>
+  <h2>並べかえよう</h2>
+  <div class="box">型：<span class="mk">先行詞（名詞）</span> ＋ <span class="mk">関係代名詞</span> ＋ 説明の文</div>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">(1)</span>これが空港行きのバスです。<br>This is ( to the airport / goes / that / the bus ).
+      <div class="ans">→ This is <b>the bus that goes to the airport.</b><span class="why">the bus ＋ that goes to the airport（主格）。</span></div></div>
+    <div class="q"><span class="no">(2)</span>彼があなたに会いたいという男性です。<br>He is ( you / wants / the man / who / to see ).
+      <div class="ans">→ He is <b>the man who wants to see you.</b><span class="why">the man ＋ who wants to see you（主格）。</span></div></div>
+    <div class="q"><span class="no">(3)</span>彼女は私がパーティーに誘った女の子です。<br>( is / asked / the girl / I / she ) to the party.
+      <div class="ans">→ <b>She is the girl I asked</b> to the party.<span class="why">the girl ＋（目的格省略）I asked。</span></div></div>
+    <div class="q"><span class="no">(4)</span>この町を案内できる人を知りませんか。<br>Do you know ( guide / someone / can / who / us ) around this town?
+      <div class="ans">→ Do you know <b>someone who can guide us</b> around this town?<span class="why">someone ＋ who can guide us（主格）。</span></div></div>
+  </div>
+  <div class="foot">12</div>
+</section>
+
+<!-- 13 L26 たんご -->
+<section class="slide">
+  <span class="tag g">p.79 たんご・タンゴ・単語！</span>
+  <h2>someone・something の仲間</h2>
+  <p class="lead">②⑤は主に否定文・疑問文で使う（タップで答え）</p>
+  <div class="qs wgrid">
+    <div class="q"><span class="no">①</span>someone<div class="ans">→ <b>だれか</b></div></div>
+    <div class="q"><span class="no">②</span>anyone<div class="ans">→ <b>だれか／だれも</b></div></div>
+    <div class="q"><span class="no">③</span>no one<div class="ans">→ <b>だれも〜ない</b></div></div>
+    <div class="q"><span class="no">④</span>something<div class="ans">→ <b>何か</b></div></div>
+    <div class="q"><span class="no">⑤</span>anything<div class="ans">→ <b>何か／何も</b></div></div>
+    <div class="q"><span class="no">⑥</span>nothing<div class="ans">→ <b>何も〜ない</b></div></div>
+  </div>
+  <div class="foot">13</div>
+</section>
+
+<!-- 14 まとめ -->
+<section class="slide">
+  <span class="tag">まとめ</span>
+  <h2>今日のポイント</h2>
+  <div class="qs" style="gap:16px">
+    <div class="box">① <b>分詞</b>：1語なら名詞の<b>前</b>、語句を伴うなら名詞の<b>後ろ</b>。-ing「〜している」／過去分詞「〜された」。</div>
+    <div class="box">② <b>関係代名詞</b>：人は who、もの・動物は which、どちらでも that。</div>
+    <div class="box red">③ 直後が<b>動詞</b>なら主格、<b>主語＋動詞</b>なら目的格（目的格は省略OK）。</div>
+  </div>
+  <div class="foot">14</div>
+</section>
+
+</div>
+
+<div id="nav">
+  <button onclick="go(-1)">◀ 前</button>
+  <button onclick="revealAll()">答えを全部</button>
+  <button onclick="hideAll()">隠す</button>
+  <button onclick="fs()">全画面</button>
+  <button onclick="go(1)">次 ▶</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].classList.add('active');}
+function go(d){show(cur+d);}
+function qs(){return [...slides[cur].querySelectorAll('.q')];}
+function step(){const h=qs().find(q=>!q.classList.contains('open'));if(h)h.classList.add('open');else go(1);}
+function revealAll(){qs().forEach(q=>q.classList.add('open'));}
+function hideAll(){qs().forEach(q=>q.classList.remove('open'));}
+function fs(){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}catch(e){}}
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',e=>{e.stopPropagation();q.classList.toggle('open');}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  else if(e.key===' '||e.key==='Enter'){e.preventDefault();step();}
+  else if(e.key==='a')revealAll();
+  else if(e.key==='f')fs();
+});
+let sx=null;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?1:-1);sx=null;});
+function fit(){const s=Math.min(innerWidth/1300,(innerHeight-50)/740);document.getElementById('stage').style.transform=`translate(-50%,-50%) translate(0,-18px) scale(${s})`;}
+addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>
