@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 25・26 分詞・関係代名詞 解説</title>
+<style>
+:root{
+  --bg:#1f2a37; --paper:#fffdf8; --ink:#1f2937; --sub:#6b7280;
+  --accent:#2563eb; --accent2:#dc2626; --ok:#047857; --soft:#eef4ff; --line:#e5e7eb; --hl:#fff3b0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);overflow:hidden;
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic UI","Meiryo",sans-serif;color:var(--ink)}
+#stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);border-radius:14px;padding:48px 64px 56px;
+  display:none;flex-direction:column;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.slide.active{display:flex}
+.tag{display:inline-block;font-size:18px;font-weight:700;color:#fff;background:var(--accent);padding:4px 14px;border-radius:999px;margin-bottom:10px;align-self:flex-start}
+.tag.g{background:#047857}
+h1{font-size:54px;line-height:1.25}
+h2{font-size:34px;margin-bottom:6px}
+.lead{font-size:21px;color:var(--sub);margin-bottom:16px}
+.qs{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
+.q{font-size:23px;line-height:1.4;padding:7px 16px;border-left:6px solid var(--line);cursor:pointer;border-radius:6px;transition:background .2s}
+.q:hover{background:#f7f7f7}
+.q .ja{font-size:17px;color:var(--sub);margin-left:12px}
+.q .no{font-weight:700;color:var(--accent);margin-right:8px}
+.ans{display:none;margin-top:2px;font-size:23px}
+.ans b{color:var(--accent2)}
+.ans u{text-decoration-color:var(--accent);text-underline-offset:3px}
+.ans .why{font-size:17px;color:var(--ok);margin-left:14px}
+.q.open{border-left-color:var(--accent2);background:#fff7f7}
+.q.open .ans{display:block}
+.blank{display:inline-block;min-width:92px;border-bottom:3px solid var(--ink);text-align:center}
+.q.open .blank{color:var(--accent2);font-weight:700;border-bottom-color:var(--accent2)}
+.q .blank .fill{visibility:hidden}
+.q.open .blank .fill{visibility:visible}
+table{border-collapse:collapse;width:100%;font-size:23px}
+th,td{border:2px solid var(--line);padding:10px 16px;text-align:left}
+th{background:var(--soft);color:var(--accent)}
+.box{background:var(--soft);border-radius:12px;padding:16px 24px;font-size:23px;line-height:1.7;margin-bottom:12px}
+.box.red{background:#fff1f1}
+.mk{background:var(--hl);padding:0 4px;border-radius:4px;font-weight:700}
+.title-slide{justify-content:center;align-items:flex-start;background:linear-gradient(135deg,#fffdf8 60%,#e0ecff)}
+.title-slide .menu{margin-top:24px;font-size:22px;line-height:1.9;color:var(--sub)}
+.foot{position:absolute;bottom:18px;right:28px;font-size:16px;color:var(--sub)}
+.hint{position:absolute;bottom:18px;left:64px;font-size:16px;color:#9ca3af}
+#nav{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+#nav button{font-size:15px;padding:8px 14px;border:none;border-radius:8px;background:rgba(255,255,255,.88);color:#111;cursor:pointer}
+#nav button:hover{background:#fff}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 タイトル -->
+<section class="slide title-slide">
+  <span class="tag">3年 文法 p.76〜79</span>
+  <h1>Lesson 25　分詞（現在・過去）<br>Lesson 26　関係代名詞</h1>
+  <div class="menu">
+    ■ Lesson 25（分詞）… Get Ready / Practice A・B / チャレンジ / 単語<br>
+    ■ Lesson 26（関係代名詞）… Get Ready / Practice A・B / チャレンジ / 単語
+  </div>
+  <div class="hint">→ / スペース で進む　問題をタップで答え表示</div>
+</section>
+
+<!-- 2 L25 まとめ -->
+<section class="slide">
+  <span class="tag">Lesson 25 ‒ まとめ</span>
+  <h2>分詞が名詞を説明する</h2>
+  <table>
+    <tr><th></th><th>意味</th><th>置く場所</th></tr>
+    <tr><td><b>現在分詞<br>（-ing）</b></td><td>「〜している」</td><td>1語 → 名詞の<b>前</b>（a sleeping princess）<br>語句つき → 名詞の<b>後ろ</b>（the girl crying on the street）</td></tr>
+    <tr><td><b>過去分詞<br>（-ed 等）</b></td><td>「〜される / された」</td><td>1語 → 名詞の<b>前</b>（a broken bed）<br>語句つき → 名詞の<b>後ろ</b>（the language spoken in〜）</td></tr>
+  </table>
+  <div class="box red" style="margin-top:14px">⚠ 自分が「〜している」なら<b>現在分詞(-ing)</b>、「〜される側」なら<b>過去分詞</b>。他の語句を伴うときは必ず名詞の<b>後ろ</b>に置く。</div>
+  <div class="foot">2</div>
+</section>
+
+<!-- 3 L25 Get Ready -->
+<section class="slide">
+  <span class="tag">Lesson 25 ‒ Get Ready</span>
+  <h2>進行形と受け身の復習（意味を書く）</h2>
+  <div class="qs">
+    <div class="q"><span class="no">1</span>The girl is dancing.
+      <div class="ans">→ <b>その女の子は踊っている。</b><span class="why">is dancing ＝ 現在進行形</span></div></div>
+    <div class="q"><span class="no">2</span>My bike was stolen.
+      <div class="ans">→ <b>私の自転車は盗まれた。</b><span class="why">was stolen ＝ 受け身</span></div></div>
+  </div>
+  <div class="foot">3</div>
+</section>
+
+<!-- 4 L25 Practice A -->
+<section class="slide">
+  <span class="tag">Lesson 25 ‒ Practice A</span>
+  <h2>（ ）から適切な語句を選ぶ</h2>
+  <div class="qs" style="gap:10px">
+    <div class="q"><span class="no">1</span>the ( train moving / moving train )
+      <div class="ans">→ <b>moving train</b><span class="why">1語なので名詞の前／動いている電車</span></div></div>
+    <div class="q"><span class="no">2</span>the ( standing boy / boy standing ) at the door
+      <div class="ans">→ <b>boy standing</b> at the door<span class="why">at the door を伴う → 名詞の後ろ／ドアのところに立っている少年</span></div></div>
+    <div class="q"><span class="no">3</span>the ( fry chicken / fried chicken )
+      <div class="ans">→ <b>fried chicken</b><span class="why">「揚げられた」過去分詞／フライドチキン</span></div></div>
+    <div class="q"><span class="no">4</span>the ( book written / written book ) by Sakura Momoko
+      <div class="ans">→ <b>book written</b> by Sakura Momoko<span class="why">by 〜 を伴う → 名詞の後ろ／さくらももこによって書かれた本</span></div></div>
+  </div>
+  <div class="foot">4</div>
+</section>
+
+<!-- 5 L25 Practice B -->
+<section class="slide">
+  <span class="tag">Lesson 25 ‒ Practice B</span>
+  <h2>〈 〉の動詞を適切な形にする</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">1</span>Look at those ( <span class="blank"><span class="fill">flying</span></span> ) birds. 〈fly〉
+      <div class="ans"><span class="why">flying（1語で前から）／あの飛んでいる鳥をごらんなさい。</span></div></div>
+    <div class="q"><span class="no">2</span>My brother bought a ( <span class="blank"><span class="fill">used</span></span> ) car at that shop. 〈use〉
+      <div class="ans"><span class="why">used ＝ 中古の（過去分詞）／兄はその店で中古車を買った。</span></div></div>
+    <div class="q"><span class="no">3</span>We use ( <span class="blank"><span class="fill">recycled</span></span> ) paper at our school. 〈recycle〉
+      <div class="ans"><span class="why">recycled ＝ 再生された／私たちは学校で再生紙を使っている。</span></div></div>
+    <div class="q"><span class="no">4</span>Can you catch a fish ( <span class="blank"><span class="fill">swimming</span></span> ) in the water? 〈swim〉
+      <div class="ans"><span class="why">in the water を伴う → 後ろから。swim→swimming／水中を泳いでいる魚</span></div></div>
+    <div class="q"><span class="no">5</span>The story ( <span class="blank"><span class="fill">told</span></span> ) by my grandmother was very interesting. 〈tell〉
+      <div class="ans"><span class="why">tell→told（過去分詞）／祖母によって話された物語</span></div></div>
+  </div>
+  <div class="foot">5</div>
+</section>
+
+<!-- 6 L25 Challenge + 単語 -->
+<section class="slide">
+  <span class="tag">Lesson 25 ‒ チャレンジ＆単語</span>
+  <h2>並べかえ／〈過去分詞＋名詞〉の意味</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">1</span>翔太とダンスをしている女の子はエミリーです。The girl ( with / Shota / dancing / is ) Emily.
+      <div class="ans">→ The girl <b>dancing with Shota is</b> Emily.<span class="why">dancing with Shota が girl を後ろから説明</span></div></div>
+    <div class="q"><span class="no">2</span>これはヴァン・ゴッホによって描かれた絵です。This is ( Van Gogh / painted / the picture / by ).
+      <div class="ans">→ This is <b>the picture painted by Van Gogh.</b></div></div>
+    <div class="q"><span class="no">3</span>私たちは路上に捨てられた缶を拾った。We picked up ( away / the cans / thrown / on the road ).
+      <div class="ans">→ We picked up <b>the cans thrown away on the road.</b><span class="why">throw away ＝ 捨てる</span></div></div>
+    <div class="q"><span class="no">単語</span>〈過去分詞＋名詞〉の意味
+      <div class="ans">① boiled egg ＝ <b>ゆで卵</b>　② used car ＝ <b>中古車</b>　③ frozen food ＝ <b>冷凍食品</b><br>④ fried chicken ＝ <b>フライドチキン</b>　⑤ recycled paper ＝ <b>再生紙</b>　⑥ mashed potatoes ＝ <b>マッシュポテト</b></div></div>
+  </div>
+  <div class="foot">6</div>
+</section>
+
+<!-- 7 L26 まとめ -->
+<section class="slide">
+  <span class="tag g">Lesson 26 ‒ まとめ</span>
+  <h2>関係代名詞の使い分け</h2>
+  <table>
+    <tr><th>先行詞</th><th>主格「〜は / が」</th><th>目的格「〜を」</th></tr>
+    <tr><td><b>人</b></td><td>who</td><td>who(m)（省略可）</td></tr>
+    <tr><td><b>人以外（物）</b></td><td>which</td><td>which（省略可）</td></tr>
+    <tr><td><b>どちらでも</b></td><td>that</td><td>that（省略可）</td></tr>
+  </table>
+  <div class="box red" style="margin-top:14px">⚠ <b>主格</b>（すぐ後ろに動詞がくる）は省略できない。<b>目的格</b>（後ろに主語＋動詞がくる）は省略できる。</div>
+  <div class="foot">7</div>
+</section>
+
+<!-- 8 L26 Get Ready -->
+<section class="slide">
+  <span class="tag g">Lesson 26 ‒ Get Ready</span>
+  <h2>適切な関係代名詞を選ぶ</h2>
+  <div class="qs" style="gap:10px">
+    <div class="q"><span class="no">1</span>I know a boy ( who / which ) cooks well.
+      <div class="ans">→ <b>who</b><span class="why">a boy ＝ 人</span></div></div>
+    <div class="q"><span class="no">2</span>Betty lives in a house ( who / which ) has a swimming pool.
+      <div class="ans">→ <b>which</b><span class="why">a house ＝ 物</span></div></div>
+    <div class="q"><span class="no">3</span>She is the girl ( that / which ) I met yesterday.
+      <div class="ans">→ <b>that</b><span class="why">the girl ＝ 人なので which は不可</span></div></div>
+    <div class="q"><span class="no">4</span>The book ( who / that ) you lent me yesterday was interesting.
+      <div class="ans">→ <b>that</b><span class="why">The book ＝ 物なので who は不可</span></div></div>
+  </div>
+  <div class="foot">8</div>
+</section>
+
+<!-- 9 L26 Practice A -->
+<section class="slide">
+  <span class="tag g">Lesson 26 ‒ Practice A</span>
+  <h2>（ ）から選ぶ（×＝省略できる）</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">1</span>A koala is an animal ( who / which / × ) lives in Australia.
+      <div class="ans">→ <b>which</b><span class="why">主格＋animal（物）／コアラはオーストラリアに住む動物です。</span></div></div>
+    <div class="q"><span class="no">2</span>Look at the house ( who / which / × ) stands by the river.
+      <div class="ans">→ <b>which</b><span class="why">主格＋house（物）／川のそばに建つ家を見なさい。</span></div></div>
+    <div class="q"><span class="no">3</span>Bob is a boy ( who / which / × ) likes collecting DVDs.
+      <div class="ans">→ <b>who</b><span class="why">主格＋boy（人）／ボブはDVD集めが好きな少年です。</span></div></div>
+    <div class="q"><span class="no">4</span>Is this the comic book ( who / whom / × ) you bought last week?
+      <div class="ans">→ <b>×</b><span class="why">目的格（you bought）→ 省略できる／これは先週買ったマンガ本ですか。</span></div></div>
+    <div class="q"><span class="no">5</span>Brad Pitt is an actor ( which / what / × ) I like very much.
+      <div class="ans">→ <b>×</b><span class="why">目的格→省略。人なのでwhich/whatは不可／私が大好きな俳優です。</span></div></div>
+  </div>
+  <div class="foot">9</div>
+</section>
+
+<!-- 10 L26 Practice B -->
+<section class="slide">
+  <span class="tag g">Lesson 26 ‒ Practice B</span>
+  <h2>名詞を説明する語句に下線／全文の意味</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">1</span>Yonezu Kenshi is <b>the man</b> who wrote Lemon.
+      <div class="ans">下線 → <u>who wrote Lemon</u><span class="why">米津玄師は「Lemon」を書いた人です。</span></div></div>
+    <div class="q"><span class="no">2</span>I have <b>a friend</b> who comes from India.
+      <div class="ans">下線 → <u>who comes from India</u><span class="why">私にはインド出身の友人がいます。</span></div></div>
+    <div class="q"><span class="no">3</span>I lost <b>the watch</b> I bought yesterday.
+      <div class="ans">下線 → <u>I bought yesterday</u><span class="why">（目的格that省略）私は昨日買った時計をなくした。</span></div></div>
+    <div class="q"><span class="no">4</span><b>The woman</b> who I saw at the station was a famous singer.
+      <div class="ans">下線 → <u>who I saw at the station</u><span class="why">私が駅で見た女性は有名な歌手だった。</span></div></div>
+  </div>
+  <div class="foot">10</div>
+</section>
+
+<!-- 11 L26 Challenge + 単語 -->
+<section class="slide">
+  <span class="tag g">Lesson 26 ‒ チャレンジ＆単語</span>
+  <h2>並べかえ／someone・something の仲間</h2>
+  <div class="qs" style="gap:8px">
+    <div class="q"><span class="no">1</span>これが空港行きのバスです。This is ( to the airport / goes / that / the bus ).
+      <div class="ans">→ This is <b>the bus that goes to the airport.</b></div></div>
+    <div class="q"><span class="no">2</span>彼があなたに会いたいという男性です。He is ( you / wants / the man / who / to see ).
+      <div class="ans">→ He is <b>the man who wants to see you.</b></div></div>
+    <div class="q"><span class="no">3</span>彼女は私がパーティーに誘った女の子です。( is / asked / the girl / I / she ) to the party.
+      <div class="ans">→ <b>She is the girl I asked</b> to the party.<span class="why">目的格は省略</span></div></div>
+    <div class="q"><span class="no">4</span>この町を案内できる人をだれか知りませんか。Do you know ( guide / someone / can / who / us ) around this town?
+      <div class="ans">→ Do you know <b>someone who can guide us</b> around this town?</div></div>
+    <div class="q"><span class="no">単語</span>someone・something の仲間
+      <div class="ans">① someone ＝ <b>だれか</b>　② anyone ＝ <b>（疑問・否定で）だれか・だれも</b>　③ no one ＝ <b>だれも〜ない</b><br>④ something ＝ <b>何か</b>　⑤ anything ＝ <b>（疑問・否定で）何か・何も</b>　⑥ nothing ＝ <b>何も〜ない</b></div></div>
+  </div>
+  <div class="foot">11</div>
+</section>
+
+<!-- 12 まとめ -->
+<section class="slide">
+  <span class="tag">まとめ</span>
+  <h2>今日のポイント</h2>
+  <div class="qs" style="gap:18px">
+    <div class="box">① <b>分詞</b>…「〜している」なら現在分詞(-ing)、「〜される / された」なら過去分詞。1語は名詞の<b>前</b>、語句つきは名詞の<b>後ろ</b>。</div>
+    <div class="box">② <b>関係代名詞</b>…先行詞が人→who、物→which、どちらでも→that。</div>
+    <div class="box red">③ すぐ後ろに<b>動詞</b>＝主格（省略不可）、後ろに<b>主語＋動詞</b>＝目的格（省略できる）。</div>
+  </div>
+  <div class="foot">12</div>
+</section>
+
+</div>
+
+<div id="nav">
+  <button onclick="go(-1)">◀ 前</button>
+  <button onclick="revealAll()">答えを全部</button>
+  <button onclick="hideAll()">隠す</button>
+  <button onclick="fs()">全画面</button>
+  <button onclick="go(1)">次 ▶</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+function show(i){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].classList.add('active');}
+function go(d){show(cur+d);}
+function qs(){return [...slides[cur].querySelectorAll('.q')];}
+function step(){const h=qs().find(q=>!q.classList.contains('open'));if(h)h.classList.add('open');else go(1);}
+function revealAll(){qs().forEach(q=>q.classList.add('open'));}
+function hideAll(){qs().forEach(q=>q.classList.remove('open'));}
+function fs(){try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}catch(e){}}
+document.querySelectorAll('.q').forEach(q=>q.addEventListener('click',e=>{e.stopPropagation();q.classList.toggle('open');}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown')go(1);
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(-1);
+  else if(e.key===' '||e.key==='Enter'){e.preventDefault();step();}
+  else if(e.key==='a')revealAll();
+  else if(e.key==='f')fs();
+});
+let sx=null;
+document.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?1:-1);sx=null;});
+function fit(){const s=Math.min(innerWidth/1300,(innerHeight-50)/740);document.getElementById('stage').style.transform=`translate(-50%,-50%) translate(0,-18px) scale(${s})`;}
+addEventListener('resize',fit);fit();show(0);
+</script>
+</body>
+</html>
